@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.app.rapidnumberconverter.ui.converter.ConverterFragment"
+        android:label="Converter"
+        tools:layout="@layout/fragment_converter" />
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.app.rapidnumberconverter.ui.calculator.CalculatorFragment"
+        android:label="Calculator"
+        tools:layout="@layout/fragment_calculator" />
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.app.rapidnumberconverter.ui.translation.TranslationFragment"
+        android:label="Translation"
+        tools:layout="@layout/fragment_translation" />
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.app.rapidnumberconverter.ui.settings.SettingsFragment"
+        android:label="Settings"
+        tools:layout="@layout/fragment_settings" />
+</navigation>

@@ -1,0 +1,53 @@
+package com.app.rapidnumberconverter.ui.base
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.annotation.CallSuper
+import androidx.annotation.LayoutRes
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import com.app.rapidnumberconverter.BR
+
+abstract class BaseRapidNumbersFragment<VM : BaseRapidNumbersViewModel, VDB : ViewDataBinding> :
+    Fragment() {
+
+    private lateinit var binding: VDB
+
+    protected val viewModel by lazy { createViewModel() }
+
+    @CallSuper
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+
+        binding = DataBindingUtil.inflate(
+            inflater,
+            getLayoutId(),
+            container,
+            false
+        )
+        return binding.root
+    }
+
+    @CallSuper
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.setVariable(BR.viewModel, viewModel)
+        viewModel.uiCommands.observe(viewLifecycleOwner, Observer(::onUiCommands))
+    }
+
+    @CallSuper
+    protected open fun onUiCommands(event: Any) {
+    }
+
+    @LayoutRes
+    protected abstract fun getLayoutId(): Int
+
+    protected abstract fun createViewModel(): VM
+}
