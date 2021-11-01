@@ -1,13 +1,18 @@
 package com.app.rapidnumberconverter.ui.converter
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.app.rapidnumberconverter.ui.base.BaseRapidNumbersViewModel
+import javax.inject.Inject
 
-class ConverterViewModel : ViewModel() {
+class ConverterViewModel @Inject constructor() : BaseRapidNumbersViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+    fun convert(){
     }
-    val text: LiveData<String> = _text
+
+    class Factory : ViewModelProvider.Factory {
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            return ConverterViewModel() as T
+        }
+    }
 }

@@ -1,44 +1,16 @@
 package com.app.rapidnumberconverter.ui.converter
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.app.rapidnumberconverter.R
 import com.app.rapidnumberconverter.databinding.FragmentConverterBinding
+import com.app.rapidnumberconverter.ui.base.BaseRapidNumbersFragment
 
-class ConverterFragment : Fragment() {
+class ConverterFragment : BaseRapidNumbersFragment<ConverterViewModel, FragmentConverterBinding>() {
 
-    private lateinit var converterViewModel: ConverterViewModel
-    private var _binding: FragmentConverterBinding? = null
+    override fun getLayoutId() = R.layout.fragment_converter
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        converterViewModel =
-            ViewModelProvider(this).get(ConverterViewModel::class.java)
-
-        _binding = FragmentConverterBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textHome
-        converterViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun createViewModel(): ConverterViewModel {
+        return ViewModelProvider(this, ConverterViewModel.Factory())
+            .get(ConverterViewModel::class.java)
     }
 }
