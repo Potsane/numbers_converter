@@ -1,44 +1,38 @@
 package com.app.rapidnumberconverter.ui.calculator
 
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.text.InputType
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
+import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.ViewModelProvider
+import com.app.rapidnumberconverter.R
 import com.app.rapidnumberconverter.databinding.FragmentCalculatorBinding
+import com.app.rapidnumberconverter.ui.base.BaseRapidNumbersFragment
 
-class CalculatorFragment : Fragment() {
+class CalculatorFragment :
+    BaseRapidNumbersFragment<CalculatorViewModel, FragmentCalculatorBinding>() {
 
-    private lateinit var calculatorViewModel: CalculatorViewModel
-    private var _binding: FragmentCalculatorBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        calculatorViewModel =
-            ViewModelProvider(this).get(CalculatorViewModel::class.java)
-
-        _binding = FragmentCalculatorBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textDashboard
-        calculatorViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val keyboard = binding.keyboard
+        val editText = binding.calculatorText.also {
+            it.setRawInputType(InputType.TYPE_CLASS_TEXT)
+            it.setTextIsSelectable(true)
+        }
+        val inputConnection = editText.onCreateInputConnection(EditorInfo())
+        keyboard.setInputConnection(inputConnection)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
+
+    override fun getLayoutId() = R.layout.fragment_calculator
+
+    override fun createViewModel(): CalculatorViewModel {
+        return ViewModelProvider(this, CalculatorViewModel.Factory())
+            .get(CalculatorViewModel::class.java)
     }
 }
