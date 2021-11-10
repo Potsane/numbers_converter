@@ -1,13 +1,14 @@
 package com.app.rapidnumberconverter.ui.calculator
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.app.rapidnumberconverter.ui.base.BaseRapidNumbersViewModel
 
-class CalculatorViewModel : ViewModel() {
+class CalculatorViewModel : BaseRapidNumbersViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
+    class Factory : ViewModelProvider.Factory{
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            return CalculatorViewModel() as T
+        }
     }
-    val text: LiveData<String> = _text
 }

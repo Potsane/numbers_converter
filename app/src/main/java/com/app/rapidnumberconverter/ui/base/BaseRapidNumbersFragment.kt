@@ -15,7 +15,7 @@ import com.app.rapidnumberconverter.BR
 abstract class BaseRapidNumbersFragment<VM : BaseRapidNumbersViewModel, VDB : ViewDataBinding> :
     Fragment() {
 
-    private lateinit var binding: VDB
+    protected lateinit var binding: VDB
 
     protected val viewModel by lazy { createViewModel() }
 
