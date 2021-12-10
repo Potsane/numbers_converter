@@ -26,7 +26,6 @@ class CalculatorFragment :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun getLayoutId() = R.layout.fragment_calculator
