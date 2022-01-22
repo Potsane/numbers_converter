@@ -7,7 +7,7 @@ import com.app.rapidnumberconverter.ui.base.BaseRapidNumbersFragment
 
 class ConverterFragment : BaseRapidNumbersFragment<ConverterViewModel, FragmentConverterBinding>() {
 
-    override fun getLayoutId() = R.layout.fragment_converter
+    override fun getLayoutId() = R.layout.fragment_converter_too
 
     override fun createViewModel(): ConverterViewModel {
         return ViewModelProvider(this, ConverterViewModel.Factory())
