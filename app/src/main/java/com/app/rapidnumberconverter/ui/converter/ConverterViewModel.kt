@@ -16,6 +16,9 @@ class ConverterViewModel @Inject constructor() : BaseRapidNumbersViewModel(),
         return Integer.toHexString(10)
     }
 
+    fun showMenuItem(){
+    }
+
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
     }
 
