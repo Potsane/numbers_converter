@@ -9,7 +9,7 @@ open class BaseRapidNumbersViewModel : ViewModel(){
     private val _uiCommands : MutableLiveData<Any> = MutableLiveData()
     val uiCommands : LiveData<Any> = _uiCommands
 
-    protected fun postUiCommands(command : Any){
+    protected fun postUiCommand(command : Any){
         _uiCommands.postValue(command)
     }
 }

@@ -10,170 +10,97 @@
             type="com.app.rapidnumberconverter.ui.converter.ConverterViewModel" />
     </data>
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/settings_scroll_view"
+    <!--    <androidx.core.widget.NestedScrollView
+            android:id="@+id/settings_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_height="fill_parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/add_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="8dp"
+            android:onClick="@{() -> viewModel.convert()}"
+            android:src="@drawable/ic_baseline_text_translate"
+            app:fabSize="normal"
+            app:layout_constraintBottom_toTopOf="@+id/guideline4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline4" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:weightSum="2">
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#e2e4e6"
+            app:layout_constraintBottom_toTopOf="@+id/guideline4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/top_constraint"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="#808080"
+            <include
+                android:id="@+id/view_from_picker"
+                layout="@layout/view_number_system_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:onClick="@{() -> viewModel.showMenuItem()}"
+                app:iconRes="@{@drawable/ic_baseline_keyboard_arrow_down_24}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                app:title="@{@string/system_picker_title_from}" />
 
-                <Button
-                    android:id="@+id/button"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:onClick="@{() -> viewModel.convert()}"
-                    android:text="Convert"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/top_constraint" />
+            <TextView
+                android:id="@+id/text_view_from"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center"
+                android:text="@{viewModel.fromNumberSystem}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view_from_picker"
+                tools:text="Binary" />
 
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginEnd="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
-                    tools:text="Conversion result" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="hint" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-
-                <com.google.android.material.textfield.TextInputLayout
-
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
-
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-
-                    android:id="@+id/textInputLayout3"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
-                    app:boxCornerRadiusBottomEnd="32dp"
-                    app:boxCornerRadiusBottomStart="32dp"
-                    app:boxCornerRadiusTopEnd="32dp"
-                    app:boxCornerRadiusTopStart="32dp"
-                    app:boxStrokeColor="@color/bg_dropdown_selector">
-
-                    <AutoCompleteTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@null" />
-
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!--<com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout3"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
-                    app:boxStrokeColor="@color/bg_dropdown_selector"
-                    android:hint="From"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <AutoCompleteTextView
-                        android:background="@null"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="none"
-                        app:itemSelectedListener="@{viewModel}"
-                        app:systems="@{viewModel.numberSystems}" />
-                </com.google.android.material.textfield.TextInputLayout>-->
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
+            <include
+                layout="@layout/view_number_input"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/top_constraint">
-
-                <Button
-                    android:id="@+id/button2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="132dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="Button"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout2"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
-                    android:hint="To"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <AutoCompleteTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="none"
-                        app:itemSelectedListener="@{viewModel}"
-                        app:systems="@{viewModel.numberSystems}" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
+                app:layout_constraintTop_toBottomOf="@+id/text_view_from" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline4">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--    </androidx.core.widget.NestedScrollView>-->
 </layout>
