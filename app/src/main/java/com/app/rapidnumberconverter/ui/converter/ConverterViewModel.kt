@@ -13,11 +13,16 @@ class ConverterViewModel @Inject constructor() : BaseRapidNumbersViewModel(),
     AdapterView.OnItemClickListener {
 
     val numberSystems = listOf("Decimal", "Hexadecimal", "Octal", "Binary")
+
     private val _fromNumberSystem = MutableLiveData("")
     val fromNumberSystem: LiveData<String> = _fromNumberSystem
 
+    private val _toNumberSystem = MutableLiveData("")
+    val toNumberSystem: LiveData<String> = _toNumberSystem
+
     init {
         _fromNumberSystem.value = numberSystems.first()
+        _toNumberSystem.value = numberSystems.last()
     }
 
     fun convert(): String {
