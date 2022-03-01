@@ -8,6 +8,10 @@
         <variable
             name="viewModel"
             type="com.app.rapidnumberconverter.ui.converter.ConverterViewModel" />
+
+        <variable
+            name="conversionContext"
+            type="com.app.rapidnumberconverter.common.ConversionContext" />
     </data>
 
     <!--    <androidx.core.widget.NestedScrollView
@@ -60,7 +64,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
-                android:onClick="@{() -> viewModel.showMenuItem()}"
+                android:onClick="@{() -> viewModel.showMenuItem(conversionContext.CONVERT_FROM)}"
                 app:iconRes="@{@drawable/ic_baseline_keyboard_arrow_down_24}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -121,7 +125,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
-                android:onClick="@{() -> viewModel.showMenuItem()}"
+                android:onClick="@{() -> viewModel.showMenuItem(conversionContext.CONVERT_TO)}"
                 app:iconRes="@{@drawable/ic_baseline_keyboard_arrow_down_24}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
