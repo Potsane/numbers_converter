@@ -1,18 +1,16 @@
 package com.app.rapidnumberconverter.ui.converter
 
-import android.view.View
-import android.widget.AdapterView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.app.rapidnumberconverter.common.ConversionContext
 import com.app.rapidnumberconverter.ui.base.BaseRapidNumbersViewModel
 import javax.inject.Inject
 
-class ConverterViewModel @Inject constructor() : BaseRapidNumbersViewModel(),
-    AdapterView.OnItemClickListener {
+class ConverterViewModel @Inject constructor() : BaseRapidNumbersViewModel() {
 
-    val numberSystems = listOf("Decimal", "Hexadecimal", "Octal", "Binary")
+    private val numberSystems = listOf("Decimal", "Hexadecimal", "Octal", "Binary")
 
     private val _fromNumberSystem = MutableLiveData("")
     val fromNumberSystem: LiveData<String> = _fromNumberSystem
@@ -21,20 +19,40 @@ class ConverterViewModel @Inject constructor() : BaseRapidNumbersViewModel(),
     val toNumberSystem: LiveData<String> = _toNumberSystem
 
     init {
-        _fromNumberSystem.value = numberSystems.first()
-        _toNumberSystem.value = numberSystems.last()
+        _fromNumberSystem.value = "Unspecified"
+        _toNumberSystem.value = "Unspecified"
     }
 
     fun convert(): String {
         return Integer.toHexString(10)
     }
 
-    fun showMenuItem() {
-        postUiCommand(ShowNumbersMenu())
+    fun showMenuItem(conversionContext: ConversionContext) {
+        when (conversionContext) {
+            ConversionContext.CONVERT_FROM -> {
+                postUiCommand(
+                    ShowFromNumbersMenu(
+                        conversionContext,
+                        numberSystems.filterNot { it == _toNumberSystem.value }
+                    )
+                )
+            }
+            ConversionContext.CONVERT_TO -> {
+                postUiCommand(
+                    ShowFromNumbersMenu(
+                        conversionContext,
+                        numberSystems.filterNot { it == _fromNumberSystem.value }
+                    )
+                )
+            }
+        }
     }
 
-    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        _fromNumberSystem.value = numberSystems[position]
+    fun onMenuItemClick(selectedOption: String, conversionContext: ConversionContext) {
+        when (conversionContext) {
+            ConversionContext.CONVERT_FROM -> _fromNumberSystem.value = selectedOption
+            ConversionContext.CONVERT_TO -> _toNumberSystem.value = selectedOption
+        }
     }
 
     class Factory : ViewModelProvider.Factory {
