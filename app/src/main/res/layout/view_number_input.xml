@@ -2,6 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="inputValue"
+            type="String" />
+
+    </data>
+
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,12 +35,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:placeholderText="0.0">
+
                 <com.google.android.material.textfield.TextInputEditText
+                    android:text="@={inputValue}"
                     android:id="@+id/text_input_from"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="0dp"
                     android:textSize="20sp" />
+
                 <requestFocus />
             </com.google.android.material.textfield.TextInputLayout>
 

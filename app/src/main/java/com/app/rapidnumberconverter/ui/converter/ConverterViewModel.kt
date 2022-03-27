@@ -5,12 +5,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.app.rapidnumberconverter.common.ConversionContext
+import com.app.rapidnumberconverter.common.NumberSystem
 import com.app.rapidnumberconverter.ui.base.BaseRapidNumbersViewModel
+import com.app.rapidnumberconverter.utils.convertDecimal
 import javax.inject.Inject
 
 class ConverterViewModel @Inject constructor() : BaseRapidNumbersViewModel() {
 
     private val numberSystems = listOf("Decimal", "Hexadecimal", "Octal", "Binary")
+    val convertingValue = MutableLiveData<String>()
 
     private val _fromNumberSystem = MutableLiveData("")
     val fromNumberSystem: LiveData<String> = _fromNumberSystem
@@ -18,13 +21,34 @@ class ConverterViewModel @Inject constructor() : BaseRapidNumbersViewModel() {
     private val _toNumberSystem = MutableLiveData("")
     val toNumberSystem: LiveData<String> = _toNumberSystem
 
+    private val _convertedValue = MutableLiveData("")
+    val convertedValue: LiveData<String> = _convertedValue
+
     init {
         _fromNumberSystem.value = "Unspecified"
         _toNumberSystem.value = "Unspecified"
+        _convertedValue.value = "0.0"
     }
 
-    fun convert(): String {
-        return Integer.toHexString(10)
+    fun convert() {
+
+        val fromNumberSystem = NumberSystem.getEnumForValue(_fromNumberSystem.value.orEmpty())64
+        val toNumberSystem = NumberSystem.getEnumForValue(_toNumberSystem.value.orEmpty())
+
+        _convertedValue.value = when (fromNumberSystem) {
+            NumberSystem.DECIMAL -> {
+                convertingValue.value?.let {
+                    convertDecimal(toNumberSystem, Integer.valueOf(it))
+                } ?: "0.0"
+            }
+            NumberSystem.OCTAL -> {
+                ""
+            }
+            NumberSystem.BINARY -> {
+                ""
+            }
+            else -> ""
+        }
     }
 
     fun showMenuItem(conversionContext: ConversionContext) {

@@ -2,10 +2,11 @@ package com.app.rapidnumberconverter.utils
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.app.rapidnumberconverter.common.NumberSystem
 import java.lang.StringBuilder
 import java.util.stream.Collectors
 
-fun String.toBinary() : String{
+fun String.toBinary(): String {
     val result = StringBuilder()
     val chars: CharArray = this.toCharArray()
     for (aChar in chars) {
@@ -18,13 +19,22 @@ fun String.toBinary() : String{
 }
 
 @RequiresApi(Build.VERSION_CODES.N)
-fun String.prettyBinary(blockSize : Int, separator : String ) : String{
+fun String.prettyBinary(blockSize: Int, separator: String): String {
 
     val result: MutableList<String> = ArrayList()
     var index = 0
     while (index < this.length) {
-        result.add(this.substring(index, Math.min(index + blockSize, this.length )))
+        result.add(this.substring(index, Math.min(index + blockSize, this.length)))
         index += blockSize
     }
     return result.stream().collect(Collectors.joining(separator))
+}
+
+fun convertDecimal(convertTo: NumberSystem, value: Int): String? {
+    return when (convertTo) {
+        NumberSystem.BINARY -> Integer.toBinaryString(value)
+        NumberSystem.OCTAL -> Integer.toOctalString(value)
+        NumberSystem.HEXADECIMAL -> Integer.toHexString(value)
+        else -> null
+    }
 }

@@ -26,13 +26,13 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/add_fab"
-            app:backgroundTint="?attr/colorPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginEnd="8dp"
             android:onClick="@{() -> viewModel.convert()}"
             android:src="@drawable/ic_baseline_text_translate"
+            app:backgroundTint="?attr/colorPrimary"
             app:fabSize="normal"
             app:layout_constraintBottom_toTopOf="@+id/guideline4"
             app:layout_constraintEnd_toEndOf="parent"
@@ -92,6 +92,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
+                app:inputValue="@={viewModel.convertingValue}"
                 app:layout_constraintBottom_toTopOf="@+id/include_number_input_actions"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -146,17 +147,18 @@
                 tools:text="Binary" />
 
             <TextView
-                android:textSize="40sp"
                 android:id="@+id/text_converted_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
-                android:text="0.0"
+                android:text="@{viewModel.convertedValue}"
+                android:textSize="40sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_view_to" />
+                app:layout_constraintTop_toBottomOf="@+id/text_view_to"
+                tools:text="0.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
