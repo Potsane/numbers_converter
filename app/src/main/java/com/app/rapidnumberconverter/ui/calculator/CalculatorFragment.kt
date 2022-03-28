@@ -12,7 +12,6 @@ import com.app.rapidnumberconverter.ui.base.BaseRapidNumbersFragment
 class CalculatorFragment :
     BaseRapidNumbersFragment<CalculatorViewModel, FragmentCalculatorBinding>() {
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val keyboard = binding.keyboard
@@ -22,10 +21,6 @@ class CalculatorFragment :
         }
         val inputConnection = editText.onCreateInputConnection(EditorInfo())
         keyboard.setInputConnection(inputConnection)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
     }
 
     override fun getLayoutId() = R.layout.fragment_calculator
