@@ -18,10 +18,10 @@ class ConverterFragment : BaseRapidNumbersFragment<ConverterViewModel, FragmentC
 
     override fun getLayoutId() = R.layout.fragment_converter
 
-    override fun onUiCommands(event: Any) {
-        if (event is ShowFromNumbersMenu) {
-            showNumbersMenuItem(event)
-        } else super.onUiCommands(event)
+    override fun onUiCommands(command: Any) {
+        if (command is ShowFromNumbersMenu) {
+            showNumbersMenuItem(command)
+        } else super.onUiCommands(command)
     }
 
     override fun createViewModel(): ConverterViewModel {

@@ -1,9 +1,11 @@
 package com.app.rapidnumberconverter.ui.base
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
@@ -43,11 +45,21 @@ abstract class BaseRapidNumbersFragment<VM : BaseRapidNumbersViewModel, VDB : Vi
     }
 
     @CallSuper
-    protected open fun onUiCommands(event: Any) {
+    protected open fun onUiCommands(command: Any) {
+        if (command is HideKeyboard) {
+            hideKryBoard()
+        }
     }
 
     @LayoutRes
     protected abstract fun getLayoutId(): Int
 
     protected abstract fun createViewModel(): VM
+
+    private fun hideKryBoard() {
+        val inputMethodManager =
+            activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+        val view = activity?.currentFocus ?: this.view
+        view?.let { inputMethodManager?.hideSoftInputFromWindow(it.windowToken, 0) }
+    }
 }

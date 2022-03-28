@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.app.rapidnumberconverter.common.ConversionContext
 import com.app.rapidnumberconverter.common.NumberSystem
 import com.app.rapidnumberconverter.ui.base.BaseRapidNumbersViewModel
+import com.app.rapidnumberconverter.ui.base.HideKeyboard
 import com.app.rapidnumberconverter.utils.convertDecimal
 import javax.inject.Inject
 
@@ -31,8 +32,8 @@ class ConverterViewModel @Inject constructor() : BaseRapidNumbersViewModel() {
     }
 
     fun convert() {
-
-        val fromNumberSystem = NumberSystem.getEnumForValue(_fromNumberSystem.value.orEmpty())64
+        postUiCommand(HideKeyboard())
+        val fromNumberSystem = NumberSystem.getEnumForValue(_fromNumberSystem.value.orEmpty())
         val toNumberSystem = NumberSystem.getEnumForValue(_toNumberSystem.value.orEmpty())
 
         _convertedValue.value = when (fromNumberSystem) {

@@ -18,5 +18,4 @@ fun setSystems(
     val adapter = ArrayAdapter(autoCompleteTextView.context, R.layout.simple_list_item_1, systems)
     autoCompleteTextView.setAdapter(adapter)
     autoCompleteTextView.onItemSelectedListener = itemSelectedListener
-//    autoCompleteTextView.setOnItemClickListener(itemSelectedListener)
 }
