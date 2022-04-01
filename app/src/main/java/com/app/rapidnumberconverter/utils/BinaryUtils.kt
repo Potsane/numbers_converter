@@ -24,17 +24,44 @@ fun String.prettyBinary(blockSize: Int, separator: String): String {
     val result: MutableList<String> = ArrayList()
     var index = 0
     while (index < this.length) {
-        result.add(this.substring(index, Math.min(index + blockSize, this.length)))
+        result.add(this.substring(index, (index + blockSize).coerceAtMost(this.length)))
         index += blockSize
     }
     return result.stream().collect(Collectors.joining(separator))
 }
 
+fun convertBinary(convertTo: NumberSystem, value: String): String? {
+    return when (convertTo) {
+        NumberSystem.OCTAL -> BinaryConverters.toOctal(value)
+        NumberSystem.DECIMAL -> BinaryConverters.toDecimal(value)
+        NumberSystem.HEXADECIMAL -> BinaryConverters.toHexadecimal(value)
+        else -> null
+    }
+}
+
 fun convertDecimal(convertTo: NumberSystem, value: Int): String? {
     return when (convertTo) {
-        NumberSystem.BINARY -> Integer.toBinaryString(value)
-        NumberSystem.OCTAL -> Integer.toOctalString(value)
-        NumberSystem.HEXADECIMAL -> Integer.toHexString(value)
+        NumberSystem.BINARY -> DecimalConverters.convertToBinary(value)
+        NumberSystem.OCTAL -> DecimalConverters.convertDecimalToOctal(value)
+        NumberSystem.HEXADECIMAL -> DecimalConverters.convertDecimalToHexadecimal(value)
+        else -> null
+    }
+}
+
+fun convertOctal(convertTo: NumberSystem, value: String): String? {
+    return when (convertTo) {
+        NumberSystem.BINARY -> OctalConverters.toBinary(value)
+        NumberSystem.DECIMAL -> OctalConverters.toDecimal(value)
+        NumberSystem.HEXADECIMAL -> OctalConverters.toHexadecimal(value)
+        else -> null
+    }
+}
+
+fun convertHexadecimal(convertTo: NumberSystem, value: String): String? {
+    return when (convertTo) {
+        NumberSystem.BINARY -> HexadecimalConverters.toBinary(value)
+        NumberSystem.OCTAL -> HexadecimalConverters.toOctal(value)
+        NumberSystem.DECIMAL -> HexadecimalConverters.toDecimal(value)
         else -> null
     }
 }
