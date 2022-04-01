@@ -8,7 +8,10 @@ import com.app.rapidnumberconverter.common.ConversionContext
 import com.app.rapidnumberconverter.common.NumberSystem
 import com.app.rapidnumberconverter.ui.base.BaseRapidNumbersViewModel
 import com.app.rapidnumberconverter.ui.base.HideKeyboard
+import com.app.rapidnumberconverter.utils.convertBinary
 import com.app.rapidnumberconverter.utils.convertDecimal
+import com.app.rapidnumberconverter.utils.convertHexadecimal
+import com.app.rapidnumberconverter.utils.convertOctal
 import javax.inject.Inject
 
 class ConverterViewModel @Inject constructor() : BaseRapidNumbersViewModel() {
@@ -36,20 +39,14 @@ class ConverterViewModel @Inject constructor() : BaseRapidNumbersViewModel() {
         val fromNumberSystem = NumberSystem.getEnumForValue(_fromNumberSystem.value.orEmpty())
         val toNumberSystem = NumberSystem.getEnumForValue(_toNumberSystem.value.orEmpty())
 
-        _convertedValue.value = when (fromNumberSystem) {
-            NumberSystem.DECIMAL -> {
-                convertingValue.value?.let {
-                    convertDecimal(toNumberSystem, Integer.valueOf(it))
-                } ?: "0.0"
+        _convertedValue.value = convertingValue.value?.let {
+            when (fromNumberSystem) {
+                NumberSystem.DECIMAL -> convertDecimal(toNumberSystem, Integer.valueOf(it))
+                NumberSystem.BINARY -> convertBinary(toNumberSystem, it)
+                NumberSystem.OCTAL -> convertOctal(toNumberSystem, it)
+                NumberSystem.HEXADECIMAL -> convertHexadecimal(toNumberSystem, it)
             }
-            NumberSystem.OCTAL -> {
-                ""
-            }
-            NumberSystem.BINARY -> {
-                ""
-            }
-            else -> ""
-        }
+        } ?: "0.0"
     }
 
     fun showMenuItem(conversionContext: ConversionContext) {
