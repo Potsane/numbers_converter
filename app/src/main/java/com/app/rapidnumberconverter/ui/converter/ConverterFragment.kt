@@ -9,6 +9,7 @@ import com.app.rapidnumberconverter.common.ConversionContext
 import com.app.rapidnumberconverter.databinding.FragmentConverterBinding
 import com.app.rapidnumberconverter.ui.base.BaseRapidNumbersFragment
 import com.app.rapidnumberconverter.ui.base.MainActivity
+import com.app.rapidnumberconverter.ui.common.showDialog
 
 class ConverterFragment : BaseRapidNumbersFragment<ConverterViewModel, FragmentConverterBinding>() {
 
@@ -19,9 +20,11 @@ class ConverterFragment : BaseRapidNumbersFragment<ConverterViewModel, FragmentC
     override fun getLayoutId() = R.layout.fragment_converter
 
     override fun onUiCommands(command: Any) {
-        if (command is ShowFromNumbersMenu) {
-            showNumbersMenuItem(command)
-        } else super.onUiCommands(command)
+        when (command) {
+            is ShowFromNumbersMenu -> showNumbersMenuItem(command)
+            is ShowInvalidNumberFormatDialog -> showInvalidNumberFormatDialog()
+            else -> super.onUiCommands(command)
+        }
     }
 
     override fun createViewModel(): ConverterViewModel {
@@ -38,6 +41,15 @@ class ConverterFragment : BaseRapidNumbersFragment<ConverterViewModel, FragmentC
             viewModel.onMenuItemClick(event.menuItems[position], event.conversionContext)
         }
         numberSystemsMenuWindow.show()
+    }
+
+    private fun showInvalidNumberFormatDialog() {
+        hideKeyBoard()
+        showDialog(
+            dialogTitle = "Number format",
+            dialogMessage = "Ensure the number is in the correct format",
+            context = requireContext()
+        )
     }
 
     private fun getMenuItemsAdapter(event: ShowFromNumbersMenu): ArrayAdapter<String> {

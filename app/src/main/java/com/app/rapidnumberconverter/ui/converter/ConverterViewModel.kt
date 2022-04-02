@@ -8,10 +8,7 @@ import com.app.rapidnumberconverter.common.ConversionContext
 import com.app.rapidnumberconverter.common.NumberSystem
 import com.app.rapidnumberconverter.ui.base.BaseRapidNumbersViewModel
 import com.app.rapidnumberconverter.ui.base.HideKeyboard
-import com.app.rapidnumberconverter.utils.convertBinary
-import com.app.rapidnumberconverter.utils.convertDecimal
-import com.app.rapidnumberconverter.utils.convertHexadecimal
-import com.app.rapidnumberconverter.utils.convertOctal
+import com.app.rapidnumberconverter.utils.*
 import javax.inject.Inject
 
 class ConverterViewModel @Inject constructor() : BaseRapidNumbersViewModel() {
@@ -38,6 +35,11 @@ class ConverterViewModel @Inject constructor() : BaseRapidNumbersViewModel() {
         postUiCommand(HideKeyboard())
         val fromNumberSystem = NumberSystem.getEnumForValue(_fromNumberSystem.value.orEmpty())
         val toNumberSystem = NumberSystem.getEnumForValue(_toNumberSystem.value.orEmpty())
+
+        if (!isValidNumberInput(convertingValue.value, fromNumberSystem)) {
+            postUiCommand(ShowInvalidNumberFormatDialog())
+            return
+        }
 
         _convertedValue.value = convertingValue.value?.let {
             when (fromNumberSystem) {
