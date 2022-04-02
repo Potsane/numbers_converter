@@ -5,13 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.app.rapidnumberconverter.common.ConversionContext
+import com.app.rapidnumberconverter.common.NumberInputListener
 import com.app.rapidnumberconverter.common.NumberSystem
 import com.app.rapidnumberconverter.ui.base.BaseRapidNumbersViewModel
 import com.app.rapidnumberconverter.ui.base.HideKeyboard
 import com.app.rapidnumberconverter.utils.*
 import javax.inject.Inject
 
-class ConverterViewModel @Inject constructor() : BaseRapidNumbersViewModel() {
+class ConverterViewModel @Inject constructor() : BaseRapidNumbersViewModel(), NumberInputListener {
 
     private val numberSystems = listOf("Decimal", "Hexadecimal", "Octal", "Binary")
     val convertingValue = MutableLiveData<String>()
@@ -77,6 +78,14 @@ class ConverterViewModel @Inject constructor() : BaseRapidNumbersViewModel() {
             ConversionContext.CONVERT_FROM -> _fromNumberSystem.value = selectedOption
             ConversionContext.CONVERT_TO -> _toNumberSystem.value = selectedOption
         }
+    }
+
+    override fun onClearText() = convertingValue.postValue("")
+
+    override fun onCopyText() {
+    }
+
+    override fun onPasteText() {
     }
 
     class Factory : ViewModelProvider.Factory {
