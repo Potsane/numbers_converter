@@ -8,6 +8,10 @@
             name="inputValue"
             type="String" />
 
+        <variable
+            name="numberSystem"
+            type="String" />
+
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -37,12 +41,13 @@
                 app:placeholderText="0.0">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:text="@={inputValue}"
                     android:id="@+id/text_input_from"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="0dp"
-                    android:textSize="20sp" />
+                    android:text="@={inputValue}"
+                    android:textSize="20sp"
+                    app:keyboardType="@{numberSystem}" />
 
                 <requestFocus />
             </com.google.android.material.textfield.TextInputLayout>
