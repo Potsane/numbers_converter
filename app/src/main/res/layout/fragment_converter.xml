@@ -93,11 +93,11 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 app:inputValue="@={viewModel.convertingValue}"
-                app:numberSystem="@{viewModel.fromNumberSystem}"
                 app:layout_constraintBottom_toTopOf="@+id/include_number_input_actions"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_view_from" />
+                app:layout_constraintTop_toBottomOf="@+id/text_view_from"
+                app:numberSystem="@{viewModel.fromNumberSystem}" />
 
             <include
                 android:id="@+id/include_number_input_actions"
@@ -107,7 +107,8 @@
                 android:layout_marginBottom="56dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/include2"
-                app:layout_constraintStart_toStartOf="@+id/include2" />
+                app:layout_constraintStart_toStartOf="@+id/include2"
+                app:listener="@{viewModel}" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
