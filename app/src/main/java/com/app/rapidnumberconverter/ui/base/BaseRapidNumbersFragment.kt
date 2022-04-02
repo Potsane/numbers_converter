@@ -47,7 +47,7 @@ abstract class BaseRapidNumbersFragment<VM : BaseRapidNumbersViewModel, VDB : Vi
     @CallSuper
     protected open fun onUiCommands(command: Any) {
         if (command is HideKeyboard) {
-            hideKryBoard()
+            hideKeyBoard()
         }
     }
 
@@ -56,7 +56,7 @@ abstract class BaseRapidNumbersFragment<VM : BaseRapidNumbersViewModel, VDB : Vi
 
     protected abstract fun createViewModel(): VM
 
-    private fun hideKryBoard() {
+    protected fun hideKeyBoard() {
         val inputMethodManager =
             activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
         val view = activity?.currentFocus ?: this.view
