@@ -9,9 +9,7 @@ import android.widget.ArrayAdapter
 import com.app.rapidnumberconverter.common.NumberSystem
 import com.google.android.material.textfield.TextInputEditText
 
-@BindingAdapter(
-    value = ["systems", "itemSelectedListener"]
-)
+@BindingAdapter(value = ["systems", "itemSelectedListener"])
 fun setSystems(
     autoCompleteTextView: AutoCompleteTextView,
     systems: List<String>,

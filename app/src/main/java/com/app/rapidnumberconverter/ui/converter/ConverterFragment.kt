@@ -28,8 +28,10 @@ class ConverterFragment : BaseRapidNumbersFragment<ConverterViewModel, FragmentC
     }
 
     override fun createViewModel(): ConverterViewModel {
-        return ViewModelProvider(this, ConverterViewModel.Factory())
-            .get(ConverterViewModel::class.java)
+        return ViewModelProvider(
+            this,
+            ConverterViewModel.Factory()
+        )[ConverterViewModel::class.java]
     }
 
     private fun showNumbersMenuItem(event: ShowFromNumbersMenu) {

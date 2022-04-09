@@ -10,9 +10,8 @@ import com.app.rapidnumberconverter.common.NumberSystem
 import com.app.rapidnumberconverter.ui.base.BaseRapidNumbersViewModel
 import com.app.rapidnumberconverter.ui.base.HideKeyboard
 import com.app.rapidnumberconverter.utils.*
-import javax.inject.Inject
 
-class ConverterViewModel @Inject constructor() : BaseRapidNumbersViewModel(), NumberInputListener {
+class ConverterViewModel : BaseRapidNumbersViewModel(), NumberInputListener {
 
     private val numberSystems = listOf("Decimal", "Hexadecimal", "Octal", "Binary")
     val convertingValue = MutableLiveData<String>()
@@ -89,7 +88,7 @@ class ConverterViewModel @Inject constructor() : BaseRapidNumbersViewModel(), Nu
     }
 
     class Factory : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return ConverterViewModel() as T
         }
     }
