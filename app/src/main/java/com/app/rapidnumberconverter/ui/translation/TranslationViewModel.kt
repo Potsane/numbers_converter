@@ -8,11 +8,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.app.rapidnumberconverter.ui.base.BaseRapidNumbersViewModel
 import com.app.rapidnumberconverter.utils.prettyBinary
 import com.app.rapidnumberconverter.utils.toBinary
-import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 
-@HiltViewModel
-class TranslationViewModel @Inject constructor() : BaseRapidNumbersViewModel() {
+class TranslationViewModel : BaseRapidNumbersViewModel() {
     private val _translatedText = MutableLiveData<String>()
     val translatedText: LiveData<String> = _translatedText
 
@@ -25,7 +22,7 @@ class TranslationViewModel @Inject constructor() : BaseRapidNumbersViewModel() {
     }
 
     class Factory : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return TranslationViewModel() as T
         }
     }

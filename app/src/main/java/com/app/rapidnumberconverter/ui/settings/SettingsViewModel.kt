@@ -6,11 +6,10 @@ import com.app.rapidnumberconverter.ui.base.BaseRapidNumbersViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-@HiltViewModel
-class SettingsViewModel  @Inject constructor() : BaseRapidNumbersViewModel(){
+class SettingsViewModel : BaseRapidNumbersViewModel() {
 
-    class Factory : ViewModelProvider.Factory{
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    class Factory : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return SettingsViewModel() as T
         }
     }
