@@ -1,24 +1,33 @@
 package com.app.rapidnumberconverter.ui.translation
 
 import android.os.Build
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.app.rapidnumberconverter.ui.base.BaseRapidNumbersViewModel
 import com.app.rapidnumberconverter.utils.prettyBinary
 import com.app.rapidnumberconverter.utils.toBinary
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
 class TranslationViewModel : BaseRapidNumbersViewModel() {
-    private val _translatedText = MutableLiveData<String>()
-    val translatedText: LiveData<String> = _translatedText
 
-    val plainText = MutableLiveData("")
+    private val directions = listOf("Text to Binary", "Binary to Text")
+    val plainText = MutableStateFlow("")
+
+    private val _translationDirection = MutableStateFlow(directions.first())
+    val translationDirection: StateFlow<String> = _translationDirection
+
+    fun showMenuItem() = postUiCommand(ShowTranslationDirectionMenu(directions))
 
     fun onTranslate() {
-        _translatedText.value = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-            plainText.value?.toBinary()?.prettyBinary(8, " ")
-        else plainText.value?.toBinary()
+        val translatedText  = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+            plainText.value.toBinary().prettyBinary(8, " ")
+        else plainText.value.toBinary()
+        postUiCommand(TranslateText(translatedText))
+    }
+
+    fun onMenuItemClick(selectedOption: String) {
+        _translationDirection.value = selectedOption
     }
 
     class Factory : ViewModelProvider.Factory {
