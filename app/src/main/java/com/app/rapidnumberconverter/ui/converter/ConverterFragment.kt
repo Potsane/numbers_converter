@@ -1,21 +1,14 @@
 package com.app.rapidnumberconverter.ui.converter
 
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.ListPopupWindow
 import androidx.lifecycle.ViewModelProvider
 import com.app.rapidnumberconverter.R
 import com.app.rapidnumberconverter.common.ConversionContext
 import com.app.rapidnumberconverter.databinding.FragmentConverterBinding
 import com.app.rapidnumberconverter.ui.base.BaseRapidNumbersFragment
-import com.app.rapidnumberconverter.ui.base.MainActivity
 import com.app.rapidnumberconverter.ui.common.showDialog
 
 class ConverterFragment : BaseRapidNumbersFragment<ConverterViewModel, FragmentConverterBinding>() {
-
-    private val numberSystemsMenuWindow by lazy {
-        ListPopupWindow(requireContext(), null, R.attr.listPopupWindowStyle)
-    }
 
     override fun getLayoutId() = R.layout.fragment_converter
 
@@ -34,15 +27,11 @@ class ConverterFragment : BaseRapidNumbersFragment<ConverterViewModel, FragmentC
         )[ConverterViewModel::class.java]
     }
 
-    private fun showNumbersMenuItem(event: ShowFromNumbersMenu) {
-        val adapter = getMenuItemsAdapter(event)
-        numberSystemsMenuWindow.anchorView = getAnchorView(event)
-        numberSystemsMenuWindow.setAdapter(adapter)
-        numberSystemsMenuWindow.setOnItemClickListener { _, _, position, _ ->
-            numberSystemsMenuWindow.dismiss()
-            viewModel.onMenuItemClick(event.menuItems[position], event.conversionContext)
-        }
-        numberSystemsMenuWindow.show()
+    private fun showNumbersMenuItem(command: ShowFromNumbersMenu) {
+        showPopupMenuItem(
+            command.menuItems,
+            getAnchorView(command)
+        ) { viewModel.onMenuItemClick(it, command .conversionContext) }
     }
 
     private fun showInvalidNumberFormatDialog() {
@@ -54,16 +43,8 @@ class ConverterFragment : BaseRapidNumbersFragment<ConverterViewModel, FragmentC
         )
     }
 
-    private fun getMenuItemsAdapter(event: ShowFromNumbersMenu): ArrayAdapter<String> {
-        return ArrayAdapter(
-            activity as MainActivity,
-            R.layout.view_number_system_item,
-            event.menuItems
-        )
-    }
-
-    private fun getAnchorView(event: ShowFromNumbersMenu): View {
-        return if (event.conversionContext == ConversionContext.CONVERT_FROM) binding.textViewFrom
+    private fun getAnchorView(command: ShowFromNumbersMenu): View {
+        return if (command.conversionContext == ConversionContext.CONVERT_FROM) binding.textViewFrom
         else binding.textViewTo
     }
 }

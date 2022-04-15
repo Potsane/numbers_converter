@@ -20,20 +20,33 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/button"
+            <include
+                android:id="@+id/view_from_picker"
+                layout="@layout/view_number_system_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:onClick="@{() -> viewModel.showMenuItem()}"
+                app:iconRes="@{@drawable/ic_baseline_keyboard_arrow_down_24}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:title="@{@string/translation_direction_picker_title}" />
+
+            <TextView
+                android:id="@+id/text_view_direction"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="32dp"
-                android:onClick="@{() -> viewModel.onTranslate()}"
-                android:text="Translate"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:gravity="center"
+                android:text="@{viewModel.translationDirection}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                app:layout_constraintTop_toBottomOf="@+id/view_from_picker"
+                tools:text="Binary" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/text_input"
@@ -41,31 +54,32 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@id/text_view_direction">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:afterTextChanged="@{() -> viewModel.onTranslate()}"
                     android:hint="hint"
                     android:text="@={viewModel.plainText}" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/textView"
+            <Button
+                android:id="@+id/button_translate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="16dp"
-                android:text="@{viewModel.translatedText}"
+                android:onClick="@{() -> viewModel.onTranslate()}"
+                android:text="Translate"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_input"
-                tools:text="Translated binary" />
+                app:layout_constraintTop_toBottomOf="@+id/text_input" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>
