@@ -12,7 +12,7 @@ fun isValidNumberInput(value: String?, fromNumberSystem: NumberSystem): Boolean 
 
     if (value.isNullOrEmpty()) return false
     return try {
-        value.toInt(typeRadix)
+        value.toBigInteger(typeRadix)
         true
     } catch (ex: Exception) {
         false

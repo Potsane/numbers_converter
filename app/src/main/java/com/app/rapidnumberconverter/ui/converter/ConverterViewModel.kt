@@ -43,7 +43,7 @@ class ConverterViewModel : BaseRapidNumbersViewModel(), NumberInputListener {
 
         _convertedValue.value = convertingValue.value?.let {
             when (fromNumberSystem) {
-                NumberSystem.DECIMAL -> convertDecimal(toNumberSystem, Integer.valueOf(it))
+                NumberSystem.DECIMAL -> convertDecimal(toNumberSystem, it)
                 NumberSystem.BINARY -> convertBinary(toNumberSystem, it)
                 NumberSystem.OCTAL -> convertOctal(toNumberSystem, it)
                 NumberSystem.HEXADECIMAL -> convertHexadecimal(toNumberSystem, it)

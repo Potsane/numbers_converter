@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.app.rapidnumberconverter.R
 import com.app.rapidnumberconverter.databinding.FragmentTranslationBinding
 import com.app.rapidnumberconverter.ui.base.BaseRapidNumbersFragment
+import com.app.rapidnumberconverter.ui.common.showDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,8 +22,9 @@ class TranslationFragment :
 
     override fun onUiCommands(command: Any) {
         when (command) {
-            is TranslateText -> showTranslationResultDialog(command.text)
+            is ShowTranslationResult -> showTranslationResultDialog(command.text)
             is ShowTranslationDirectionMenu -> showDirectionsMenuItem(command.menuItems)
+            is ShowInvalidTextFormatDialog -> showInvalidNumberFormatDialog()
             else -> super.onUiCommands(command)
         }
     }
@@ -30,6 +32,15 @@ class TranslationFragment :
     private fun showTranslationResultDialog(text: String) {
         val bottomSheetFragment = TranslationResultDialogFragment.newInstance(text)
         bottomSheetFragment.show(parentFragmentManager, null)
+    }
+
+    private fun showInvalidNumberFormatDialog() {
+        hideKeyBoard()
+        showDialog(
+            dialogTitle = "Invalid format",
+            dialogMessage = "Ensure the text is in the correct format",
+            context = requireContext()
+        )
     }
 
     private fun showDirectionsMenuItem(items: List<String>) {
