@@ -17,8 +17,8 @@
         android:title="Translation" />
 
     <item
-        android:id="@+id/navigation_settings"
+        android:id="@+id/navigation_about"
         android:icon="@drawable/ic_baseline_settings"
-        android:title="Settings" />
+        android:title="About" />
 
 </menu>
