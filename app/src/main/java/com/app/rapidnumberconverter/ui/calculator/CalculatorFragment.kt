@@ -14,13 +14,13 @@ class CalculatorFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val keyboard = binding.keyboard
+       /* val keyboard = binding.keyboard
         val editText = binding.calculatorText.also {
             it.setRawInputType(InputType.TYPE_CLASS_TEXT)
             it.setTextIsSelectable(true)
         }
         val inputConnection = editText.onCreateInputConnection(EditorInfo())
-        keyboard.setInputConnection(inputConnection)
+        keyboard.setInputConnection(inputConnection)*/
     }
 
     override fun getLayoutId() = R.layout.fragment_calculator
