@@ -11,12 +11,11 @@ fun showDialog(
     context: Context,
     onClickListener: DialogInterface.OnClickListener? = null
 ) {
-    val builder = AlertDialog.Builder(context)
-    builder.setMessage(dialogMessage)
+    val dialog = AlertDialog.Builder(context)
         .setTitle(dialogTitle)
-    builder.setNegativeButton("Cancel", null)
-    builder.setPositiveButton(dialogPositiveButtonText, onClickListener)
-
-    val dialog: AlertDialog = builder.create()
+        .setMessage(dialogMessage)
+        .setNegativeButton("Cancel", null)
+        .setPositiveButton(dialogPositiveButtonText, onClickListener)
+        .create()
     dialog.show()
 }

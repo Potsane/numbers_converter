@@ -5,12 +5,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.app.rapidnumberconverter.R
 import com.app.rapidnumberconverter.common.ConversionContext
 import com.app.rapidnumberconverter.databinding.FragmentConverterBinding
+import com.app.rapidnumberconverter.databinding.FragmentConverterTooBinding
 import com.app.rapidnumberconverter.ui.base.BaseRapidNumbersFragment
 import com.app.rapidnumberconverter.ui.common.showDialog
 
-class ConverterFragment : BaseRapidNumbersFragment<ConverterViewModel, FragmentConverterBinding>() {
+class ConverterFragment : BaseRapidNumbersFragment<ConverterViewModel, FragmentConverterTooBinding>() {
 
-    override fun getLayoutId() = R.layout.fragment_converter
+    override fun getLayoutId() = R.layout.fragment_converter_too
 
     override fun onUiCommands(command: Any) {
         when (command) {
