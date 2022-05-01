@@ -12,13 +12,13 @@
         tools:layout="@layout/fragment_converter" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.app.rapidnumberconverter.ui.calculator.CalculatorFragment"
-        android:label="Calculator"
-        tools:layout="@layout/fragment_calculator" />
+        android:id="@+id/navigation_learn"
+        android:name="com.app.rapidnumberconverter.ui.learn.LearnFragment"
+        android:label="Learn"
+        tools:layout="@layout/fragment_learn" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_translation"
         android:name="com.app.rapidnumberconverter.ui.translation.TranslationFragment"
         android:label="Translation"
         tools:layout="@layout/fragment_translation" />

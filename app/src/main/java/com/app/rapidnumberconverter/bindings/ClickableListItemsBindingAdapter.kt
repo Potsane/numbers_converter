@@ -5,8 +5,10 @@ import android.view.ViewGroup
 import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import com.app.rapidnumberconverter.common.BaseCardItemClickListener
 import com.app.rapidnumberconverter.BR
+import com.app.rapidnumberconverter.common.BaseCardItemClickListener
+import com.app.rapidnumberconverter.common.LearnCardItem
+import com.app.rapidnumberconverter.common.LearnCardItemClickListener
 
 @BindingAdapter(
     value = ["items", "itemsLayout", "itemsClickListener"],
@@ -16,7 +18,7 @@ fun <T> setListItems(
     viewGroup: ViewGroup,
     items: List<T>,
     layout: Int,
-    onItemClickListener: BaseCardItemClickListener<T>
+    onItemClickListener: BaseCardItemClickListener<T>? = null
 ) {
 
     viewGroup.removeAllViews()
@@ -31,8 +33,26 @@ fun <T> setListItems(
             viewGroup,
             true
         )
-        binding?.setVariable(BR.clickListener, onItemClickListener)
+        onItemClickListener?.let { binding?.setVariable(BR.clickListener, it) }
         binding?.setVariable(BR.item, item)
         binding?.executePendingBindings()
+    }
+}
+
+@BindingAdapter(
+    value = ["cards", "onClickListener"],
+    requireAll = true
+)
+fun setLearnListItems(
+    viewGroup: ViewGroup,
+    items: List<LearnCardItem>,
+    onClickListener: LearnCardItemClickListener
+) {
+
+    val context = viewGroup.context ?: return
+    viewGroup.removeAllViews()
+
+    items.forEach {
+        viewGroup.addView(createExpandableCard(context, it, onClickListener))
     }
 }
