@@ -7,14 +7,14 @@
         android:title="Converter" />
 
     <item
-        android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/ic_baseline_calculate"
-        android:title="Calculator" />
-
-    <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_translation"
         android:icon="@drawable/ic_baseline_text_translate"
         android:title="Translation" />
+
+    <item
+        android:id="@+id/navigation_learn"
+        android:icon="@drawable/ic_baseline_calculate"
+        android:title="Learn" />
 
     <item
         android:id="@+id/navigation_about"
