@@ -1,6 +1,5 @@
 package com.app.rapidnumberconverter.ui.learn
 
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.app.rapidnumberconverter.R
 import com.app.rapidnumberconverter.databinding.FragmentLearnBinding

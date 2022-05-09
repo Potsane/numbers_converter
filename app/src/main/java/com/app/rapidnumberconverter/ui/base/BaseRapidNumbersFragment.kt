@@ -1,6 +1,8 @@
 package com.app.rapidnumberconverter.ui.base
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +18,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.app.rapidnumberconverter.BR
 import com.app.rapidnumberconverter.R
+import com.app.rapidnumberconverter.ui.about.LaunchExternalPage
 
 abstract class BaseRapidNumbersFragment<VM : BaseRapidNumbersViewModel, VDB : ViewDataBinding> :
     Fragment() {
@@ -49,10 +52,10 @@ abstract class BaseRapidNumbersFragment<VM : BaseRapidNumbersViewModel, VDB : Vi
 
     @CallSuper
     protected open fun onUiCommands(command: Any) {
-        if (command is HideKeyboard) {
-            hideKeyBoard()
-        }else if (command is ShowProgress){
-            showProgressBar(command.show)
+        when (command) {
+            is HideKeyboard -> hideKeyBoard()
+            is ShowProgress -> showProgressBar(command.show)
+            is LaunchExternalPage -> openWebPage(command.url)
         }
     }
 
@@ -94,6 +97,12 @@ abstract class BaseRapidNumbersFragment<VM : BaseRapidNumbersViewModel, VDB : Vi
         )
     }
 
-    fun showProgressBar(show: Boolean) = (requireActivity() as MainActivity).showProgressBar(show)
+    private fun showProgressBar(show: Boolean) =
+        (requireActivity() as MainActivity).showProgressBar(show)
+
+    private fun openWebPage(url: String?) {
+        val browse = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(browse)
+    }
 
 }

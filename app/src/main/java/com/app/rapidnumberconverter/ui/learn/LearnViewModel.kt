@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.app.rapidnumberconverter.common.LearnCardItem
 import com.app.rapidnumberconverter.common.LearnCardItemClickListener
 import com.app.rapidnumberconverter.repository.LearArticlesRepository
+import com.app.rapidnumberconverter.ui.about.LaunchExternalPage
 import com.app.rapidnumberconverter.ui.base.BaseRapidNumbersViewModel
 import com.app.rapidnumberconverter.ui.base.ShowProgress
 import com.app.rapidnumberconverter.utils.learnArticlez
@@ -42,5 +43,6 @@ class LearnViewModel @Inject constructor(
     }
 
     override fun onMoreButtonClick(item: LearnCardItem) {
+        postUiCommand(LaunchExternalPage(item.url))
     }
 }
