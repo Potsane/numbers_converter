@@ -45,14 +45,13 @@ fun <T> setListItems(
 )
 fun setLearnListItems(
     viewGroup: ViewGroup,
-    items: List<LearnCardItem>,
+    items: List<LearnCardItem>?,
     onClickListener: LearnCardItemClickListener
 ) {
 
     val context = viewGroup.context ?: return
     viewGroup.removeAllViews()
-
-    items.forEach {
+    items?.forEach {
         viewGroup.addView(createExpandableCard(context, it, onClickListener))
     }
 }

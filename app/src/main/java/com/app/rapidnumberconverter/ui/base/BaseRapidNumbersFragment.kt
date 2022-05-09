@@ -51,6 +51,8 @@ abstract class BaseRapidNumbersFragment<VM : BaseRapidNumbersViewModel, VDB : Vi
     protected open fun onUiCommands(command: Any) {
         if (command is HideKeyboard) {
             hideKeyBoard()
+        }else if (command is ShowProgress){
+            showProgressBar(command.show)
         }
     }
 
@@ -91,4 +93,7 @@ abstract class BaseRapidNumbersFragment<VM : BaseRapidNumbersViewModel, VDB : Vi
             items
         )
     }
+
+    fun showProgressBar(show: Boolean) = (requireActivity() as MainActivity).showProgressBar(show)
+
 }

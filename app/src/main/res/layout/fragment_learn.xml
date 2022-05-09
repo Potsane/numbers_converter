@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="java.util.List" />
+
         <variable
             name="viewModel"
             type="com.app.rapidnumberconverter.ui.learn.LearnViewModel" />
@@ -43,7 +45,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="16dp"
                 android:orientation="vertical"
-                app:cards="@{viewModel.items}"
+                app:cards="@{viewModel.learnArticles}"
                 app:onClickListener="@{viewModel}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
