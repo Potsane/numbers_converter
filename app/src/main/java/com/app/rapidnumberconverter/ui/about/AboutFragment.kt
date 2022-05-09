@@ -1,7 +1,6 @@
 package com.app.rapidnumberconverter.ui.about
 
 import android.content.Intent
-import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import com.app.rapidnumberconverter.R
 import com.app.rapidnumberconverter.databinding.FragmentAboutBinding
@@ -17,15 +16,9 @@ class AboutFragment : BaseRapidNumbersFragment<AboutViewModel, FragmentAboutBind
 
     override fun onUiCommands(command: Any) {
         when (command) {
-            is LaunchExternalPage -> openWebPage(command.url)
             is ShareApp ->  shareText(command.title, command.body)
             else -> super.onUiCommands(command)
         }
-    }
-
-    private fun openWebPage(url: String?) {
-        val browse = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-        startActivity(browse)
     }
 
     private fun shareText(subject: String?, body: String?) {
