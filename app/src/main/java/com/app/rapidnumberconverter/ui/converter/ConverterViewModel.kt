@@ -15,7 +15,6 @@ import com.app.rapidnumberconverter.utils.*
 class ConverterViewModel : BaseRapidNumbersViewModel(), NumberInputListener {
 
     private val numberSystems = listOf("Decimal", "Hexadecimal", "Octal", "Binary")
-    val convertingValue = MutableLiveData<String>()
 
     private val _fromNumberSystem = MutableLiveData("")
     val fromNumberSystem: LiveData<String> = _fromNumberSystem
@@ -23,9 +22,11 @@ class ConverterViewModel : BaseRapidNumbersViewModel(), NumberInputListener {
     private val _toNumberSystem = MutableLiveData("")
     val toNumberSystem: LiveData<String> = _toNumberSystem
 
+    val convertingValue = MutableLiveData<String>()
+
     init {
-        _fromNumberSystem.value = "Unspecified"
-        _toNumberSystem.value = "Unspecified"
+        _fromNumberSystem.value = numberSystems.first()
+        _toNumberSystem.value = numberSystems.last()
     }
 
     fun convert() {
@@ -35,6 +36,11 @@ class ConverterViewModel : BaseRapidNumbersViewModel(), NumberInputListener {
 
         if (!isValidNumberInput(convertingValue.value, fromNumberSystem)) {
             postUiCommand(ShowInvalidNumberFormatDialog())
+            return
+        }
+
+        if (toNumberSystem == fromNumberSystem) {
+            postUiCommand(ShowTranslationResult(convertingValue.value ?: "Something went wrong!"))
             return
         }
 
@@ -52,20 +58,10 @@ class ConverterViewModel : BaseRapidNumbersViewModel(), NumberInputListener {
     fun showMenuItem(conversionContext: ConversionContext) {
         when (conversionContext) {
             ConversionContext.CONVERT_FROM -> {
-                postUiCommand(
-                    ShowFromNumbersMenu(
-                        conversionContext,
-                        numberSystems.filterNot { it == _toNumberSystem.value }
-                    )
-                )
+                postUiCommand(ShowFromNumbersMenu(conversionContext, numberSystems))
             }
             ConversionContext.CONVERT_TO -> {
-                postUiCommand(
-                    ShowFromNumbersMenu(
-                        conversionContext,
-                        numberSystems.filterNot { it == _fromNumberSystem.value }
-                    )
-                )
+                postUiCommand(ShowFromNumbersMenu(conversionContext, numberSystems))
             }
         }
     }
