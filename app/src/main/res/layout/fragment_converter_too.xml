@@ -76,6 +76,9 @@
                     tools:text="Binary" />
 
                 <include
+                    app:clickListener="@{viewModel}"
+                    app:inputValue="@={viewModel.convertingValue}"
+                    app:numberSystem="@{viewModel.fromNumberSystem}"
                     android:id="@+id/include"
                     layout="@layout/item_number_input"
                     android:layout_width="0dp"
@@ -119,7 +122,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="16dp"
-                    android:text="Button"
+                    android:text="Convert"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
