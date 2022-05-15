@@ -22,16 +22,10 @@ class TranslationFragment :
 
     override fun onUiCommands(command: Any) {
         when (command) {
-            is ShowTranslationResult -> showTranslationResultDialog(command.text)
             is ShowTranslationDirectionMenu -> showDirectionsMenuItem(command.menuItems)
             is ShowInvalidTextFormatDialog -> showInvalidNumberFormatDialog()
             else -> super.onUiCommands(command)
         }
-    }
-
-    private fun showTranslationResultDialog(text: String) {
-        val bottomSheetFragment = TranslationResultDialogFragment.newInstance(text)
-        bottomSheetFragment.show(parentFragmentManager, null)
     }
 
     private fun showInvalidNumberFormatDialog() {

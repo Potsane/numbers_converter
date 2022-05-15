@@ -19,6 +19,8 @@ import androidx.lifecycle.Observer
 import com.app.rapidnumberconverter.BR
 import com.app.rapidnumberconverter.R
 import com.app.rapidnumberconverter.ui.about.LaunchExternalPage
+import com.app.rapidnumberconverter.ui.translation.ShowTranslationResult
+import com.app.rapidnumberconverter.ui.translation.TranslationResultDialogFragment
 
 abstract class BaseRapidNumbersFragment<VM : BaseRapidNumbersViewModel, VDB : ViewDataBinding> :
     Fragment() {
@@ -56,6 +58,7 @@ abstract class BaseRapidNumbersFragment<VM : BaseRapidNumbersViewModel, VDB : Vi
             is HideKeyboard -> hideKeyBoard()
             is ShowProgress -> showProgressBar(command.show)
             is LaunchExternalPage -> openWebPage(command.url)
+            is ShowTranslationResult -> showTranslationResultDialog(command.text)
         }
     }
 
@@ -75,6 +78,11 @@ abstract class BaseRapidNumbersFragment<VM : BaseRapidNumbersViewModel, VDB : Vi
             activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
         val view = activity?.currentFocus ?: this.view
         view?.let { inputMethodManager?.hideSoftInputFromWindow(it.windowToken, 0) }
+    }
+
+    private fun showTranslationResultDialog(text: String) {
+        val bottomSheetFragment = TranslationResultDialogFragment.newInstance(text)
+        bottomSheetFragment.show(parentFragmentManager, null)
     }
 
     protected fun showPopupMenuItem(
