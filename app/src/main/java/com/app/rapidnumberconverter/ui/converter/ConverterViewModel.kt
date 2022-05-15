@@ -23,13 +23,9 @@ class ConverterViewModel : BaseRapidNumbersViewModel(), NumberInputListener {
     private val _toNumberSystem = MutableLiveData("")
     val toNumberSystem: LiveData<String> = _toNumberSystem
 
-    private val _convertedValue = MutableLiveData("")
-    val convertedValue: LiveData<String> = _convertedValue
-
     init {
         _fromNumberSystem.value = "Unspecified"
         _toNumberSystem.value = "Unspecified"
-        _convertedValue.value = "0.0"
     }
 
     fun convert() {
@@ -83,11 +79,9 @@ class ConverterViewModel : BaseRapidNumbersViewModel(), NumberInputListener {
 
     override fun onClearText() = convertingValue.postValue("")
 
-    override fun onCopyText() {
-    }
+    override fun onCopyText() = postUiCommand(CopyText(convertingValue.value.orEmpty()))
 
-    override fun onPasteText() {
-    }
+    override fun onPasteText() = postUiCommand(PasteText())
 
     class Factory : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {

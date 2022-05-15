@@ -18,152 +18,116 @@
         android:id="@+id/settings_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true" >
+        android:fillViewport="true">
 
-        <!--            app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#e2e4e6"
+            android:paddingBottom="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/add_fab"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/text_view_title"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginEnd="8dp"
-                android:onClick="@{() -> viewModel.convert()}"
-                android:src="@drawable/ic_baseline_text_translate"
-                app:backgroundTint="?attr/colorPrimary"
-                app:fabSize="normal"
-                app:layout_constraintBottom_toTopOf="@+id/guideline4"
+                android:text="Numbers converter"
+                android:textAlignment="center"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/guideline4" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Numbers converter" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.5" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <include
+                android:id="@+id/view_from_picker"
+                layout="@layout/view_number_system_picker"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:background="#e2e4e6"
-                app:layout_constraintBottom_toTopOf="@+id/guideline4"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:onClick="@{() -> viewModel.showMenuItem(conversionContext.CONVERT_FROM)}"
+                app:iconRes="@{@drawable/ic_baseline_keyboard_arrow_down_24}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.082"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_title"
+                app:title="@{@string/system_picker_title_from}" />
+
+            <TextView
+                android:id="@+id/text_view_from"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@{viewModel.fromNumberSystem}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view_from_picker"
+                tools:text="Binary" />
+
+            <include
+                android:id="@+id/view_number_input"
+                layout="@layout/item_number_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                app:clickListener="@{viewModel}"
+                app:inputValue="@={viewModel.convertingValue}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_to"
+                app:numberSystem="@{viewModel.fromNumberSystem}" />
+
+            <include
+                android:id="@+id/view_to_picker"
+                layout="@layout/view_number_system_picker"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:onClick="@{() -> viewModel.showMenuItem(conversionContext.CONVERT_TO)}"
+                app:iconRes="@{@drawable/ic_baseline_keyboard_arrow_down_24}"
+                app:layout_constraintStart_toStartOf="@+id/view_from_picker"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_from"
+                app:title="@{@string/system_picker_title_to}" />
+
+            <TextView
+                android:id="@+id/text_view_to"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@{viewModel.toNumberSystem}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view_to_picker"
+                tools:text="Binary" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:onClick="@{() -> viewModel.convert()}"
+                android:text="Convert"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0">
+                app:layout_constraintTop_toBottomOf="@+id/view_number_input" />
 
-                <include
-                    android:id="@+id/view_from_picker"
-                    layout="@layout/view_number_system_picker"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:onClick="@{() -> viewModel.showMenuItem(conversionContext.CONVERT_FROM)}"
-                    app:iconRes="@{@drawable/ic_baseline_keyboard_arrow_down_24}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:title="@{@string/system_picker_title_from}" />
-
-                <TextView
-                    android:id="@+id/text_view_from"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:gravity="center"
-                    android:text="@{viewModel.fromNumberSystem}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view_from_picker"
-                    tools:text="Binary" />
-
-                <include
-                    android:id="@+id/include2"
-                    layout="@layout/view_number_input"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
-                    app:inputValue="@={viewModel.convertingValue}"
-                    app:layout_constraintBottom_toTopOf="@+id/include_number_input_actions"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_view_from"
-                    app:numberSystem="@{viewModel.fromNumberSystem}" />
-
-                <include
-                    android:id="@+id/include_number_input_actions"
-                    layout="@layout/item_number_input_actions"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="56dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/include2"
-                    app:layout_constraintStart_toStartOf="@+id/include2"
-                    app:listener="@{viewModel}" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/guideline4">
-
-                <include
-                    android:id="@+id/view_to_picker"
-                    layout="@layout/view_number_system_picker"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:onClick="@{() -> viewModel.showMenuItem(conversionContext.CONVERT_TO)}"
-                    app:iconRes="@{@drawable/ic_baseline_keyboard_arrow_down_24}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:title="@{@string/system_picker_title_to}" />
-
-                <TextView
-                    android:id="@+id/text_view_to"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:gravity="center"
-                    android:text="@{viewModel.toNumberSystem}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view_to_picker"
-                    tools:text="Binary" />
-
-                <TextView
-                    android:id="@+id/text_converted_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="16dp"
-                    android:text="@{viewModel.convertedValue}"
-                    android:textSize="40sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_view_to"
-                    tools:text="0.0" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>

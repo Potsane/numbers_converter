@@ -1,22 +1,30 @@
 package com.app.rapidnumberconverter.ui.converter
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context.CLIPBOARD_SERVICE
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.app.rapidnumberconverter.R
 import com.app.rapidnumberconverter.common.ConversionContext
 import com.app.rapidnumberconverter.databinding.FragmentConverterBinding
-import com.app.rapidnumberconverter.databinding.FragmentConverterTooBinding
 import com.app.rapidnumberconverter.ui.base.BaseRapidNumbersFragment
 import com.app.rapidnumberconverter.ui.common.showDialog
 
-class ConverterFragment : BaseRapidNumbersFragment<ConverterViewModel, FragmentConverterTooBinding>() {
+class ConverterFragment : BaseRapidNumbersFragment<ConverterViewModel, FragmentConverterBinding>() {
 
-    override fun getLayoutId() = R.layout.fragment_converter_too
+    private val clipboardManager by lazy {
+        requireContext().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager?
+    }
+
+    override fun getLayoutId() = R.layout.fragment_converter
 
     override fun onUiCommands(command: Any) {
         when (command) {
             is ShowFromNumbersMenu -> showNumbersMenuItem(command)
             is ShowInvalidNumberFormatDialog -> showInvalidNumberFormatDialog()
+            is CopyText -> copyText(command.text)
+            is PasteText -> pasteText()
             else -> super.onUiCommands(command)
         }
     }
@@ -32,7 +40,7 @@ class ConverterFragment : BaseRapidNumbersFragment<ConverterViewModel, FragmentC
         showPopupMenuItem(
             command.menuItems,
             getAnchorView(command)
-        ) { viewModel.onMenuItemClick(it, command .conversionContext) }
+        ) { viewModel.onMenuItemClick(it, command.conversionContext) }
     }
 
     private fun showInvalidNumberFormatDialog() {
@@ -42,6 +50,20 @@ class ConverterFragment : BaseRapidNumbersFragment<ConverterViewModel, FragmentC
             dialogMessage = "Ensure the number is in the correct format",
             context = requireContext()
         )
+    }
+
+
+    //Copy to clip board
+    private fun copyText(text: String) {
+        val clip = ClipData.newPlainText("result", text)
+        clipboardManager?.setPrimaryClip(clip)
+    }
+
+    //paste from clip board
+    private fun pasteText() {
+        val pasteData: ClipData? = clipboardManager?.primaryClip
+        val item = pasteData?.getItemAt(0)
+        viewModel.convertingValue.value = item?.text.toString()
     }
 
     private fun getAnchorView(command: ShowFromNumbersMenu): View {
