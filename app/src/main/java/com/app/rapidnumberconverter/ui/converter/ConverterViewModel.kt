@@ -9,6 +9,7 @@ import com.app.rapidnumberconverter.common.NumberInputListener
 import com.app.rapidnumberconverter.common.NumberSystem
 import com.app.rapidnumberconverter.ui.base.BaseRapidNumbersViewModel
 import com.app.rapidnumberconverter.ui.base.HideKeyboard
+import com.app.rapidnumberconverter.ui.translation.ShowTranslationResult
 import com.app.rapidnumberconverter.utils.*
 
 class ConverterViewModel : BaseRapidNumbersViewModel(), NumberInputListener {
@@ -41,7 +42,7 @@ class ConverterViewModel : BaseRapidNumbersViewModel(), NumberInputListener {
             return
         }
 
-        _convertedValue.value = convertingValue.value?.let {
+        val convertedValue = convertingValue.value?.let {
             when (fromNumberSystem) {
                 NumberSystem.DECIMAL -> convertDecimal(toNumberSystem, it)
                 NumberSystem.BINARY -> convertBinary(toNumberSystem, it)
@@ -49,6 +50,7 @@ class ConverterViewModel : BaseRapidNumbersViewModel(), NumberInputListener {
                 NumberSystem.HEXADECIMAL -> convertHexadecimal(toNumberSystem, it)
             }
         } ?: "0.0"
+        postUiCommand(ShowTranslationResult(convertedValue))
     }
 
     fun showMenuItem(conversionContext: ConversionContext) {
