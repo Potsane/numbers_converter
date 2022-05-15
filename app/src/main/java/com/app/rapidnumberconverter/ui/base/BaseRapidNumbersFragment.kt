@@ -59,6 +59,12 @@ abstract class BaseRapidNumbersFragment<VM : BaseRapidNumbersViewModel, VDB : Vi
         }
     }
 
+    @CallSuper
+    override fun onPause() {
+        super.onPause()
+        showProgressBar(false)
+    }
+
     @LayoutRes
     protected abstract fun getLayoutId(): Int
 
