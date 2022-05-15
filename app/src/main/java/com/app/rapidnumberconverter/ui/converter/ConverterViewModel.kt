@@ -52,7 +52,7 @@ class ConverterViewModel : BaseRapidNumbersViewModel(), NumberInputListener {
                 NumberSystem.HEXADECIMAL -> convertHexadecimal(toNumberSystem, it)
             }
         } ?: "0.0"
-        postUiCommand(ShowTranslationResult(convertedValue))
+        postUiCommand(ShowTranslationResult(convertedValue, "Converted Value"))
     }
 
     fun showMenuItem(conversionContext: ConversionContext) {

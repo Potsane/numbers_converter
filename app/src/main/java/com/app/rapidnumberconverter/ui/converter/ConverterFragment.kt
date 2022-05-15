@@ -52,14 +52,11 @@ class ConverterFragment : BaseRapidNumbersFragment<ConverterViewModel, FragmentC
         )
     }
 
-
-    //Copy to clip board
     private fun copyText(text: String) {
         val clip = ClipData.newPlainText("result", text)
         clipboardManager?.setPrimaryClip(clip)
     }
 
-    //paste from clip board
     private fun pasteText() {
         val pasteData: ClipData? = clipboardManager?.primaryClip
         val item = pasteData?.getItemAt(0)

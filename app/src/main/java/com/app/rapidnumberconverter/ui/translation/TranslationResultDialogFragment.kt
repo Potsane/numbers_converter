@@ -17,6 +17,7 @@ class TranslationResultDialogFragment : BottomSheetDialogFragment(), Translation
 
     private lateinit var binding: FragmentTranslationResultDialogBinding
     private val translatedText by lazy { requireArguments().getString(TRANSLATED_TEXT) }
+    private val title by lazy { requireArguments().getString(TITLE_TEXT) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +34,7 @@ class TranslationResultDialogFragment : BottomSheetDialogFragment(), Translation
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        title?.let { binding.textViewTitle.text = title }
         binding.textViewTranslatedText.text = translatedText
         binding.setVariable(BR.listener, this)
     }
@@ -49,11 +51,14 @@ class TranslationResultDialogFragment : BottomSheetDialogFragment(), Translation
     companion object {
 
         private const val TRANSLATED_TEXT = "translated_text"
+        private const val TITLE_TEXT = "title_text"
 
-        fun newInstance(translatedText: String) = TranslationResultDialogFragment().apply {
-            arguments = Bundle().apply {
-                putString(TRANSLATED_TEXT, translatedText)
+        fun newInstance(translatedText: String, title: String? = null) =
+            TranslationResultDialogFragment().apply {
+                arguments = Bundle().apply {
+                    putString(TRANSLATED_TEXT, translatedText)
+                    putString(TITLE_TEXT, title)
+                }
             }
-        }
     }
 }

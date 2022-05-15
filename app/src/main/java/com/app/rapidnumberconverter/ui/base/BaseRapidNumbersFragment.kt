@@ -58,7 +58,7 @@ abstract class BaseRapidNumbersFragment<VM : BaseRapidNumbersViewModel, VDB : Vi
             is HideKeyboard -> hideKeyBoard()
             is ShowProgress -> showProgressBar(command.show)
             is LaunchExternalPage -> openWebPage(command.url)
-            is ShowTranslationResult -> showTranslationResultDialog(command.text)
+            is ShowTranslationResult -> showTranslationResultDialog(command.title, command.text)
         }
     }
 
@@ -80,8 +80,8 @@ abstract class BaseRapidNumbersFragment<VM : BaseRapidNumbersViewModel, VDB : Vi
         view?.let { inputMethodManager?.hideSoftInputFromWindow(it.windowToken, 0) }
     }
 
-    private fun showTranslationResultDialog(text: String) {
-        val bottomSheetFragment = TranslationResultDialogFragment.newInstance(text)
+    private fun showTranslationResultDialog(title: String?, text: String) {
+        val bottomSheetFragment = TranslationResultDialogFragment.newInstance(text, title)
         bottomSheetFragment.show(parentFragmentManager, null)
     }
 
