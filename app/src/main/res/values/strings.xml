@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RapidNumberConverter</string>
+    <string name="app_name">Numbers Converter</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
@@ -8,4 +8,5 @@
     <string name="system_picker_title_from">Convert from</string>
     <string name="system_picker_title_to">Convert to</string>
     <string name="translation_direction_picker_title">Binary translations</string>
+    <string name="about_app_title">Numbers Converter App</string>
 </resources>

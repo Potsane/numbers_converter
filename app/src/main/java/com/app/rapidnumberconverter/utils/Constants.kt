@@ -3,7 +3,7 @@ package com.app.rapidnumberconverter.utils
 object Constants {
 
     const val APP_URL = "market://details?id=online.whatsuptonight"
-    const val PAY_PAL_URL = "https://www.paypal.me/potsane"
+    const val PAY_PAL_URL = "https://www.buymeacoffee.com/topcode"
     const val OPEN_SOURCE_URL = "https://opensource.org/licenses/Apache-2.0"
     const val SHARE_APP_TITLE = "Rapid numbers converter"
     const val SHARE_APP_BODY =

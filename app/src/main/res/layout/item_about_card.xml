@@ -17,21 +17,20 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:onClick="@{() -> clickListener.onCardClick(item) }"
+        android:layout_marginBottom="16dp"
         app:cardElevation="2dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:paddingBottom="4dp">
+            android:paddingBottom="16dp">
 
             <TextView
-                android:id="@+id/text_view_location_name"
+                android:id="@+id/text_view_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -46,47 +45,31 @@
                 tools:text="More" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/text_view_info"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                android:text="@{item.description}"
+                app:htmlText="@{item.description}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_view_location_name"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_title"
                 tools:text="Description" />
 
             <Button
-                android:id="@+id/button_view"
+                android:id="@+id/button_more"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="2dp"
                 android:layout_marginTop="16dp"
                 android:background="?android:selectableItemBackground"
                 android:onClick="@{() -> clickListener.onPrimaryButtonClick(item)}"
                 android:text="@{item.primaryButton}"
                 android:textColor="?attr/colorPrimary"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView"
-                tools:text="Button 1" />
-
-            <Button
-                android:id="@+id/button_delete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:background="?android:selectableItemBackground"
-                android:onClick="@{() -> clickListener.onSecondaryButtonClick(item)}"
-                android:text="@{item.secondaryButton}"
-                android:textColor="?attr/colorPrimary"
-                app:layout_constraintStart_toEndOf="@+id/button_view"
-                app:layout_constraintTop_toBottomOf="@+id/textView"
-                app:showOrHide="@{item.secondaryButton != null}"
-                tools:text="Button 2" />
-
+                app:layout_constraintTop_toBottomOf="@+id/text_view_info"
+                tools:text="Learn more" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>
