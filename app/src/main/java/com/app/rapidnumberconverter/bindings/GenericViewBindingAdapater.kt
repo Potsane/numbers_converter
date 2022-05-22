@@ -1,5 +1,6 @@
 package com.app.rapidnumberconverter.bindings
 
+import android.content.pm.PackageManager
 import android.os.Build
 import android.text.Html
 import android.view.View
@@ -24,4 +25,18 @@ fun setHtmlText(textView: TextView, text: String?) {
             textView.text = Html.fromHtml(it)
         }
     }
+}
+
+@BindingAdapter("versionNumber")
+fun setVersionNumber(textView: TextView?, defaultText : String) {
+    if (textView == null) return
+    textView.text = "Version number " +
+        try {
+            textView.context.packageManager.getPackageInfo(
+                textView.context.packageName,
+                0
+            ).versionName
+        } catch (e: PackageManager.NameNotFoundException) {
+            defaultText
+        }
 }
