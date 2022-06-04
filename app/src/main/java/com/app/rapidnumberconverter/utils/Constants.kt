@@ -1,8 +1,10 @@
 package com.app.rapidnumberconverter.utils
 
+import com.app.rapidnumberconverter.BuildConfig
+
 object Constants {
 
-    const val APP_URL = "market://details?id=online.whatsuptonight"
+    const val APP_URL = "market://details?id=${BuildConfig.APPLICATION_ID}"
     const val PAY_PAL_URL = "https://www.buymeacoffee.com/topcode"
     const val OPEN_SOURCE_URL = "https://opensource.org/licenses/Apache-2.0"
     const val SHARE_APP_TITLE = "Rapid numbers converter"
