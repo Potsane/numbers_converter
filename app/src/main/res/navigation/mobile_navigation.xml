@@ -15,7 +15,11 @@
         android:id="@+id/navigation_learn"
         android:name="com.app.rapidnumberconverter.ui.learn.LearnFragment"
         android:label="Learn"
-        tools:layout="@layout/fragment_learn" />
+        tools:layout="@layout/fragment_learn">
+        <action
+            android:id="@+id/learn_to_error"
+            app:destination="@id/navigation_error" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_translation"
@@ -27,4 +31,16 @@
         android:name="com.app.rapidnumberconverter.ui.about.AboutFragment"
         android:label="About"
         tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/navigation_error"
+        android:name="com.app.rapidnumberconverter.ui.error.ErrorFragment"
+        android:label="Error"
+        tools:layout="@layout/fragment_error">
+        <action
+            android:id="@+id/error_to_home"
+            app:destination="@id/navigation_home"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/mobile_navigation"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>
