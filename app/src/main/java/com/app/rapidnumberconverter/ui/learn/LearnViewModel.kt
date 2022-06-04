@@ -9,7 +9,6 @@ import com.app.rapidnumberconverter.repository.LearArticlesRepository
 import com.app.rapidnumberconverter.ui.about.LaunchExternalPage
 import com.app.rapidnumberconverter.ui.base.BaseRapidNumbersViewModel
 import com.app.rapidnumberconverter.ui.base.ShowProgress
-import com.app.rapidnumberconverter.utils.learnArticlez
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,26 +18,31 @@ class LearnViewModel @Inject constructor(
     private val learnArticlesRepository: LearArticlesRepository
 ) : BaseRapidNumbersViewModel(), LearnCardItemClickListener {
 
-    val items = learnArticlez
-
     private val _learnArticles = MutableLiveData<List<LearnCardItem>>()
     val learnArticles: LiveData<List<LearnCardItem>> = _learnArticles
 
-    init {
-        fetchLearnArticles()
+    fun onResume() {
+        if (_learnArticles.value == null) {
+            fetchLearnArticles()
+        }
     }
 
     private fun fetchLearnArticles() {
         viewModelScope.launch {
             postUiCommand(ShowProgress(true))
-            learnArticlesRepository.fetchLearnArticles().let { response ->
-                if (response.isSuccessful) {
-                    _learnArticles.value = response.body()
-                } else {
-                    //show some error
+            try {
+                learnArticlesRepository.fetchLearnArticles().let { response ->
+                    if (response.isSuccessful) {
+                        _learnArticles.value = response.body()
+                    } else {
+                        navigate(LearnFragmentDirections.learnToError())
+                    }
                 }
+                postUiCommand(ShowProgress(false))
+
+            } catch (exception: Exception) {
+                navigate(LearnFragmentDirections.learnToError())
             }
-            postUiCommand(ShowProgress(false))
         }
     }
 

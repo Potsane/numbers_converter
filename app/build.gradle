@@ -6,6 +6,7 @@ plugins {
     id 'dagger.hilt.android.plugin'
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -70,5 +71,12 @@ dependencies {
 
     //Firebase
     implementation platform('com.google.firebase:firebase-bom:30.0.1')
+
+    //Lotties
+    implementation 'com.airbnb.android:lottie:5.0.3'
+
+    // Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:2.4.2"
+    implementation "androidx.navigation:navigation-ui-ktx:2.4.2"
 }
 

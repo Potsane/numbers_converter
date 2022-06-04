@@ -12,6 +12,11 @@ class LearnFragment : BaseRapidNumbersFragment<LearnViewModel, FragmentLearnBind
     override fun getLayoutId() = R.layout.fragment_learn
 
     override fun createViewModel(): LearnViewModel {
-         return ViewModelProvider(this)[LearnViewModel::class.java]
-     }
+        return ViewModelProvider(this)[LearnViewModel::class.java]
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.onResume()
+    }
 }

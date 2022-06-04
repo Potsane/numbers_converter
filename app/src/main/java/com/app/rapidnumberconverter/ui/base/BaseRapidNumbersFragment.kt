@@ -16,8 +16,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.app.rapidnumberconverter.BR
 import com.app.rapidnumberconverter.R
+import com.app.rapidnumberconverter.navigation.NavigationCommand
 import com.app.rapidnumberconverter.ui.about.LaunchExternalPage
 import com.app.rapidnumberconverter.ui.translation.ShowTranslationResult
 import com.app.rapidnumberconverter.ui.translation.TranslationResultDialogFragment
@@ -50,6 +52,14 @@ abstract class BaseRapidNumbersFragment<VM : BaseRapidNumbersViewModel, VDB : Vi
         binding.lifecycleOwner = viewLifecycleOwner
         binding.setVariable(BR.viewModel, viewModel)
         viewModel.uiCommands.observe(viewLifecycleOwner, Observer(::onUiCommands))
+        viewModel.navigationCommands.observe(viewLifecycleOwner, Observer(::onNavigate))
+    }
+
+    private fun onNavigate(navigationCommand: NavigationCommand) {
+        when (navigationCommand) {
+            is NavigationCommand.ToDirection -> findNavController().navigate(navigationCommand.directions)
+            is NavigationCommand.Back -> findNavController().navigateUp()
+        }
     }
 
     @CallSuper
