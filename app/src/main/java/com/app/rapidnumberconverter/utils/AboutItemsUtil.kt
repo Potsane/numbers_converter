@@ -22,10 +22,10 @@ val aboutItems = listOf(
         primaryButton = "Rate the app",
         type = AboutCardItemType.RATE_US
     ),
-    AboutCardItem(
+  /*  AboutCardItem(
         title = "Support us",
         description = "Love the app, you can help us keep going by donating to us.",
         primaryButton = "Buy us coffee",
         type = AboutCardItemType.SUPPORT_APP
-    )
+    )*/
 )
