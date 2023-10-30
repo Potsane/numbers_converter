@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "42096378323",
+    "project_id": "numbers-converter-1e4a3",
+    "storage_bucket": "numbers-converter-1e4a3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:42096378323:android:1d8fa0a897024ef6ad6f26",
+        "android_client_info": {
+          "package_name": "com.app.rapidnumberconverter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "42096378323-hnq7o9rr8d5pa9f6l3tq1sok20f2kqbl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDt6lkLMYfq_4MJZEBZVCm8oTO78EX3c4s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "42096378323-hnq7o9rr8d5pa9f6l3tq1sok20f2kqbl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
