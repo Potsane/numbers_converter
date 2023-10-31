@@ -1,6 +1,6 @@
 package com.app.rapidnumberconverter.injection
 
-import androidx.viewbinding.BuildConfig
+import com.app.rapidnumberconverter.BuildConfig
 import com.app.rapidnumberconverter.network.ConverterApiService
 import dagger.Module
 import dagger.Provides

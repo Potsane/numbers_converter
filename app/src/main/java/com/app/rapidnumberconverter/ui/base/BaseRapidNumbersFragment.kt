@@ -101,7 +101,7 @@ abstract class BaseRapidNumbersFragment<VM : BaseRapidNumbersViewModel, VDB : Vi
         onItemCLicked: (String) -> Unit
     ) {
         val numberSystemsMenuWindow =
-            ListPopupWindow(requireContext(), null, R.attr.listPopupWindowStyle)
+            ListPopupWindow(requireContext(), null, androidx.appcompat.R.attr.listPopupWindowStyle)
 
         val adapter = getMenuItemsAdapter(items)
         numberSystemsMenuWindow.anchorView = anchorView
