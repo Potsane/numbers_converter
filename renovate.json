@@ -4,7 +4,22 @@
     "config:base"
   ],
   "schedule": [
-    "on wednesday"
+    "after 9pm and before 5:00am"
   ],
-  "timezone": "Africa/Johannesburg"
+  "timezone": "Africa/Johannesburg",
+
+  "commitMessageAction" : "Bump",
+  "ignoreUnstable" : true,
+  "dependencyDashboardTitle": "Android Dependencies Dashboard",
+  "dependencyDashboardHeader": "List of planned Android upcoming dependencies updates. Note : Closing an update MR will make Renovate ignore the version update",
+  "packageRules": [
+    {
+      "groupName": "kotlin dependencies",
+      "matchPackagePatterns": [
+        "org.jetbrains.kotlin:*",
+        "com.google.devtools.ksp",
+        "composeOptions"
+      ]
+    }
+  ]
 }
