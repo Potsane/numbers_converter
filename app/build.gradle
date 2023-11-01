@@ -72,7 +72,7 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:30.0.1')
 
     //Lotties
-    implementation 'com.airbnb.android:lottie:5.0.3'
+    implementation 'com.airbnb.android:lottie:5.2.0'
 
     // Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:2.7.4"
