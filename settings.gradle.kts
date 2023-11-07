@@ -7,4 +7,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "RapidNumberConverter"
-include ':app'
+include (":app")
