@@ -9,7 +9,7 @@ googleServices = "4.3.10"
 gradle = "8.1.2"
 junit = "1.1.5"
 junitVersion = "4.13.2"
-kotlinGradlePlugin = "1.8.22"
+kotlinGradlePlugin = "1.9.20"
 legacySupportV4 = "1.0.0"
 lifecycleLivedataKtx = "2.6.2"
 
