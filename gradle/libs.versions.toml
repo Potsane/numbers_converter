@@ -31,7 +31,7 @@ retrofitVersion = "2.9.0"
 gsonVersion = "2.10.1"
 
 #Okhttop
-okhttpVersion = "4.9.0"
+okhttpVersion = "4.12.0"
 
 #hilt
 hiltAndroid = "2.48.1"
