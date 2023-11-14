@@ -22,7 +22,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="24dp"
+        android:elevation="@dimen/dp_one_and_half"
         android:paddingEnd="0dp"
         android:shadowRadius="550"
         app:cardBackgroundColor="#e2e4e6"
@@ -49,15 +49,15 @@
                 app:placeholderText="0.0">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:text="@={inputValue}"
                     android:id="@+id/calculator_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingStart="16dp"
-                    android:paddingTop="16dp"
-                    android:paddingEnd="16dp"
-                    android:paddingBottom="16dp"
-                    app:keyboardType="@{numberSystem}"/>
+                    android:paddingStart="@dimen/dp_standard"
+                    android:paddingTop="@dimen/dp_standard"
+                    android:paddingEnd="@dimen/dp_standard"
+                    android:paddingBottom="@dimen/dp_standard"
+                    android:text="@={inputValue}"
+                    app:keyboardType="@{numberSystem}" />
 
                 <requestFocus />
             </com.google.android.material.textfield.TextInputLayout>
@@ -66,12 +66,12 @@
                 android:id="@+id/button_clear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginStart="@dimen/dp_one_quarter"
+                android:layout_marginTop="@dimen/dp_half"
+                android:layout_marginBottom="@dimen/dp_half"
                 android:background="?android:selectableItemBackground"
                 android:onClick="@{() -> clickListener.onClearText()}"
-                android:text="Clear"
+                android:text="@string/button_clear"
                 android:textColor="?attr/colorPrimary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -82,36 +82,34 @@
                 android:id="@+id/button_copy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginStart="@dimen/dp_half"
+                android:layout_marginTop="@dimen/dp_half"
+                android:layout_marginEnd="@dimen/dp_half"
+                android:layout_marginBottom="@dimen/dp_half"
                 android:background="?android:selectableItemBackground"
                 android:onClick="@{() -> clickListener.onCopyText()}"
-                android:text="Copy"
+                android:text="@string/button_copy"
                 android:textColor="?attr/colorPrimary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/button_paste"
                 app:layout_constraintStart_toEndOf="@+id/button_clear"
                 app:layout_constraintTop_toBottomOf="@+id/text_input"
-                app:layout_constraintVertical_bias="0.0"
                 tools:text="Copy" />
 
             <Button
                 android:id="@+id/button_paste"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginTop="@dimen/dp_half"
+                android:layout_marginEnd="@dimen/dp_half"
+                android:layout_marginBottom="@dimen/dp_half"
                 android:background="?android:selectableItemBackground"
                 android:onClick="@{() -> clickListener.onPasteText()}"
-                android:text="Paste"
+                android:text="@string/button_paste"
                 android:textColor="?attr/colorPrimary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_input"
-                app:layout_constraintVertical_bias="0.0"
                 tools:text="Paste" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

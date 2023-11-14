@@ -20,4 +20,7 @@
     <string name="button_translate">Translate</string>
     <string name="button_copy">Copy</string>
     <string name="title_translated_text_dialog">Translated text</string>
+    <string name="button_learn_more">Learn more</string>
+    <string name="button_clear">Clear</string>
+    <string name="button_paste">Paste</string>
 </resources>
