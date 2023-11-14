@@ -79,4 +79,14 @@ dependencies {
     // Navigation
     implementation(libs.androidx.navigation.navigation.fragment.ktx)
     implementation(libs.navigation.ui.ktx)
+
+    // Compose
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.activity)
+    implementation(libs.compose.material)
+    implementation(libs.compose.materia3)
+    implementation(libs.compose.runtime)
+    implementation(libs.compose.ui)
+    implementation(libs.compose.ui.graphics)
+    implementation(libs.compose.ui.tooling.preview)
 }
