@@ -9,4 +9,15 @@
     <string name="system_picker_title_to">Convert to</string>
     <string name="translation_direction_picker_title">Binary translations</string>
     <string name="about_app_title">Numbers Converter App</string>
+    <string name="about_app_heading">About</string>
+    <string name="button_convert">Convert</string>
+    <string name="numbers_converter_heading">Numbers converter</string>
+    <string name="button_got_it">Got it</string>
+    <string name="button_try_again">Try again</string>
+    <string name="generic_error_message">Oops an error has occurred, please try again</string>
+    <string name="title_learn_articles">Learn articles</string>
+    <string name="hint_translation_source">binary / text</string>
+    <string name="button_translate">Translate</string>
+    <string name="button_copy">Copy</string>
+    <string name="title_translated_text_dialog">Translated text</string>
 </resources>
