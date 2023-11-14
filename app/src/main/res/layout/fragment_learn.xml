@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="java.util.List" />
 
         <variable
@@ -25,32 +26,32 @@
                 android:id="@+id/text_view_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="8dp"
-                android:text="Learn articles"
+                android:layout_marginStart="@dimen/dp_half"
+                android:layout_marginTop="@dimen/dp_one_and_half"
+                android:layout_marginEnd="@dimen/dp_half"
+                android:text="@string/title_learn_articles"
                 android:textAlignment="center"
-                android:textSize="20sp"
+                android:textSize="@dimen/sp_one_and_quarter"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Here is the text" />
 
             <LinearLayout
-                android:paddingBottom="24dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginStart="@dimen/dp_half"
+                android:layout_marginTop="@dimen/dp_standard"
+                android:layout_marginEnd="@dimen/dp_half"
+                android:layout_marginBottom="@dimen/dp_standard"
                 android:orientation="vertical"
+                android:paddingBottom="@dimen/dp_one_and_half"
                 app:cards="@{viewModel.learnArticles}"
-                app:onClickListener="@{viewModel}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_view_title" />
+                app:layout_constraintTop_toBottomOf="@+id/text_view_title"
+                app:onClickListener="@{viewModel}" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
