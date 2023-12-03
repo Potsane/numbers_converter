@@ -42,7 +42,7 @@ retrofitVersion = "2.9.0"
 okhttpVersion = "4.12.0"
 
 #hilt
-hiltAndroid = "2.48.1"
+hiltAndroid = "2.49"
 hiltCompilerVersion = "1.1.0"
 
 #Compose
