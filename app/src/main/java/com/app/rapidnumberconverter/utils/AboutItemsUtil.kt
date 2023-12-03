@@ -7,7 +7,7 @@ val aboutItems = listOf(
     AboutCardItem(
         title = "License info",
         description = "Open source licensing.",
-        primaryButton = "View more",
+        primaryButton = "View",
         type = AboutCardItemType.LICENSE
     ),
     AboutCardItem(
@@ -19,7 +19,7 @@ val aboutItems = listOf(
     AboutCardItem(
         title = "Rate us",
         description = "Love using this app, please give us a thumbs up on the Google Play Store.",
-        primaryButton = "Rate the app",
+        primaryButton = "Rate",
         type = AboutCardItemType.RATE_US
     ),
   /*  AboutCardItem(

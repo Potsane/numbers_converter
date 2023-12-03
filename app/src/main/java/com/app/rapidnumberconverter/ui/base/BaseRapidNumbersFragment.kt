@@ -12,6 +12,8 @@ import android.widget.ArrayAdapter
 import android.widget.ListPopupWindow
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
@@ -36,21 +38,30 @@ abstract class BaseRapidNumbersFragment<VM : BaseRapidNumbersViewModel, VDB : Vi
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        binding = DataBindingUtil.inflate(
-            inflater,
-            getLayoutId(),
-            container,
-            false
-        )
-        return binding.root
+        return if (this is ComposableScreen) {
+            ComposeView(requireContext()).apply {
+                setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+                setContent()
+            }
+        } else {
+            binding = DataBindingUtil.inflate(
+                inflater,
+                getLayoutId(),
+                container,
+                false
+            )
+            binding.root
+        }
     }
 
     @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.setVariable(BR.viewModel, viewModel)
+        if (this !is ComposableScreen) {
+            binding.lifecycleOwner = viewLifecycleOwner
+            binding.setVariable(BR.viewModel, viewModel)
+        }
+
         viewModel.uiCommands.observe(viewLifecycleOwner, Observer(::onUiCommands))
         viewModel.navigationCommands.observe(viewLifecycleOwner, Observer(::onNavigate))
     }

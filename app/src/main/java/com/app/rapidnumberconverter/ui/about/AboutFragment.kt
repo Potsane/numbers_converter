@@ -1,12 +1,16 @@
 package com.app.rapidnumberconverter.ui.about
 
 import android.content.Intent
+import androidx.compose.ui.platform.ComposeView
 import androidx.lifecycle.ViewModelProvider
 import com.app.rapidnumberconverter.R
 import com.app.rapidnumberconverter.databinding.FragmentAboutBinding
 import com.app.rapidnumberconverter.ui.base.BaseRapidNumbersFragment
+import com.app.rapidnumberconverter.ui.base.ComposableScreen
+import com.app.rapidnumberconverter.ui.theme.NumbersConverterAppTheme
 
-class AboutFragment : BaseRapidNumbersFragment<AboutViewModel, FragmentAboutBinding>() {
+class AboutFragment : BaseRapidNumbersFragment<AboutViewModel, FragmentAboutBinding>(),
+    ComposableScreen {
 
     override fun getLayoutId() = R.layout.fragment_about
 
@@ -16,7 +20,7 @@ class AboutFragment : BaseRapidNumbersFragment<AboutViewModel, FragmentAboutBind
 
     override fun onUiCommands(command: Any) {
         when (command) {
-            is ShareApp ->  shareText(command.title, command.body)
+            is ShareApp -> shareText(command.title, command.body)
             else -> super.onUiCommands(command)
         }
     }
@@ -27,6 +31,12 @@ class AboutFragment : BaseRapidNumbersFragment<AboutViewModel, FragmentAboutBind
         txtIntent.putExtra(Intent.EXTRA_SUBJECT, subject)
         txtIntent.putExtra(Intent.EXTRA_TEXT, body)
         startActivity(Intent.createChooser(txtIntent, "Share"))
+    }
+
+    override fun ComposeView.setContent() = setContent {
+        NumbersConverterAppTheme {
+            AboutScreen()
+        }
     }
 
 }
