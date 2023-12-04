@@ -10,7 +10,8 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 
 private val LightColorScheme = lightColorScheme(
-    primary = GreenA700
+    primary = GreenA700,
+    background = White100
 )
 
 @Composable

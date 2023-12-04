@@ -1,5 +1,6 @@
 package com.app.rapidnumberconverter.ui.component
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -9,6 +10,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,10 +25,17 @@ import com.app.rapidnumberconverter.common.AboutCardItem
 import com.app.rapidnumberconverter.common.AboutCardItemType
 import com.app.rapidnumberconverter.ui.theme.NumbersConverterAppTheme
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AboutCard(cardItem: AboutCardItem) {
+fun AboutCard(
+    cardItem: AboutCardItem,
+    onCardItemClick: (AboutCardItem) -> Unit = {}
+) {
 
     Card(
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
+        modifier = Modifier.background(Color.Red),
+        onClick = { onCardItemClick(cardItem) },
         shape = MaterialTheme.shapes.small,
         elevation = CardDefaults.cardElevation(dimensionResource(R.dimen.dp_one_eighth)),
     ) {
@@ -57,7 +66,7 @@ fun AboutCard(cardItem: AboutCardItem) {
             )
 
             Button(
-                onClick = {},
+                onClick = { onCardItemClick(cardItem) },
                 shape = MaterialTheme.shapes.small,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.Transparent,
