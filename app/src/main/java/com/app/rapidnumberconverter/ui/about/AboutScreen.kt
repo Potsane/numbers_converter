@@ -13,11 +13,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import com.app.rapidnumberconverter.R
+import com.app.rapidnumberconverter.common.AboutCardItem
 import com.app.rapidnumberconverter.ui.component.AboutCard
 import com.app.rapidnumberconverter.utils.aboutItems
 
 @Composable
-fun AboutScreen() {
+fun AboutScreen(onCardClick: (AboutCardItem) -> Unit) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
@@ -44,7 +45,7 @@ fun AboutScreen() {
                             horizontal = dimensionResource(R.dimen.dp_standard)
                         )
                 ) {
-                    AboutCard(cardItem = it)
+                    AboutCard(cardItem = it) { onCardClick(it) }
                 }
             }
         }

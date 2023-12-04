@@ -139,5 +139,4 @@ abstract class BaseRapidNumbersFragment<VM : BaseRapidNumbersViewModel, VDB : Vi
         val browse = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(browse)
     }
-
 }
