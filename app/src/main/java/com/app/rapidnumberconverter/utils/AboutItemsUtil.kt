@@ -1,27 +1,36 @@
 package com.app.rapidnumberconverter.utils
 
-import com.app.rapidnumberconverter.common.AboutCardItem
-import com.app.rapidnumberconverter.common.AboutCardItemType
+import com.app.rapidnumberconverter.common.ContentCardItem
+import com.app.rapidnumberconverter.common.ContentCardItemAction
+import com.app.rapidnumberconverter.common.ContentCardItemActionType
 
 val aboutItems = listOf(
-    AboutCardItem(
+    ContentCardItem(
         title = "License info",
         description = "Open source licensing.",
-        primaryButton = "View",
-        type = AboutCardItemType.LICENSE
+        action = ContentCardItemAction(
+            name = "View",
+            type = ContentCardItemActionType.REDIRECT,
+            url = Constants.OPEN_SOURCE_URL
+        )
     ),
-    AboutCardItem(
+    ContentCardItem(
         title = "Share the app",
         description = "Love using this app, feel free to share with those around you.",
-        primaryButton = "Share",
-        type = AboutCardItemType.SHARE_APP
+        action = ContentCardItemAction(
+            name = "Share",
+            type = ContentCardItemActionType.SHARE,
+        )
     ),
-    AboutCardItem(
+    ContentCardItem(
         title = "Rate us",
         description = "Love using this app, please give us a thumbs up on the Google Play Store.",
-        primaryButton = "Rate",
-        type = AboutCardItemType.RATE_US
-    ),
+        action = ContentCardItemAction(
+            name = "Rate",
+            type = ContentCardItemActionType.REDIRECT,
+            url = Constants.APP_URL
+        )
+    )
   /*  AboutCardItem(
         title = "Support us",
         description = "Love the app, you can help us keep going by donating to us.",

@@ -3,12 +3,12 @@ package com.app.rapidnumberconverter.ui.learn
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.app.rapidnumberconverter.common.LearnCardItem
-import com.app.rapidnumberconverter.common.LearnCardItemClickListener
+import com.app.rapidnumberconverter.common.ContentCardItem
 import com.app.rapidnumberconverter.repository.LearArticlesRepository
 import com.app.rapidnumberconverter.ui.about.LaunchExternalPage
 import com.app.rapidnumberconverter.ui.base.BaseRapidNumbersViewModel
 import com.app.rapidnumberconverter.ui.base.ShowProgress
+import com.app.rapidnumberconverter.utils.mockLearnItems
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,10 +16,10 @@ import javax.inject.Inject
 @HiltViewModel
 class LearnViewModel @Inject constructor(
     private val learnArticlesRepository: LearArticlesRepository
-) : BaseRapidNumbersViewModel(), LearnCardItemClickListener {
+) : BaseRapidNumbersViewModel() {
 
-    private val _learnArticles = MutableLiveData<List<LearnCardItem>>()
-    val learnArticles: LiveData<List<LearnCardItem>> = _learnArticles
+    private val _learnArticles = MutableLiveData<List<ContentCardItem>>()
+    val learnArticles: LiveData<List<ContentCardItem>> = _learnArticles
 
     fun onResume() {
         if (_learnArticles.value == null) {
@@ -32,11 +32,13 @@ class LearnViewModel @Inject constructor(
             postUiCommand(ShowProgress(true))
             try {
                 learnArticlesRepository.fetchLearnArticles().let { response ->
-                    if (response.isSuccessful) {
+                    _learnArticles.value = mockLearnItems
+                    //Fix service
+                    /*if (response.isSuccessful) {
                         _learnArticles.value = response.body()
                     } else {
                         navigate(LearnFragmentDirections.learnToError())
-                    }
+                    }*/
                 }
                 postUiCommand(ShowProgress(false))
 
@@ -46,7 +48,7 @@ class LearnViewModel @Inject constructor(
         }
     }
 
-    override fun onMoreButtonClick(item: LearnCardItem) {
-        postUiCommand(LaunchExternalPage(item.url))
+    fun onMoreButtonClick(item: ContentCardItem) {
+        postUiCommand(LaunchExternalPage(item.action.url))
     }
 }
