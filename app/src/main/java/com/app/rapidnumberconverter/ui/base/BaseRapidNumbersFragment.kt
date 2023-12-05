@@ -90,7 +90,7 @@ abstract class BaseRapidNumbersFragment<VM : BaseRapidNumbersViewModel, VDB : Vi
     }
 
     @LayoutRes
-    protected abstract fun getLayoutId(): Int
+    open fun getLayoutId()= 0
 
     protected abstract fun createViewModel(): VM
 

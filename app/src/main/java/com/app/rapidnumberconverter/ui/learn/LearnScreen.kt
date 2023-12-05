@@ -1,4 +1,4 @@
-package com.app.rapidnumberconverter.ui.about
+package com.app.rapidnumberconverter.ui.learn
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,29 +15,25 @@ import androidx.compose.ui.res.stringResource
 import com.app.rapidnumberconverter.R
 import com.app.rapidnumberconverter.common.ContentCardItem
 import com.app.rapidnumberconverter.ui.component.ContentCard
-import com.app.rapidnumberconverter.utils.aboutItems
 
 @Composable
-fun AboutScreen(onCardClick: (ContentCardItem) -> Unit) {
+fun LearnScreen(
+    learnItems: List<ContentCardItem>,
+    onCardClick: (ContentCardItem) -> Unit,
+) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
     ) {
 
         Text(
-            modifier = Modifier.padding(
-                top = dimensionResource(R.dimen.sp_one_and_half)
-            ),
-            text = stringResource(R.string.about_app_heading),
+            modifier = Modifier.padding(top = dimensionResource(R.dimen.sp_one_and_half)),
+            text = stringResource(R.string.title_learn_articles),
             style = MaterialTheme.typography.titleLarge
-        )
-        Text(
-            modifier = Modifier.padding(bottom = dimensionResource(R.dimen.dp_half)),
-            text = stringResource(R.string.about_app_title)
         )
 
         LazyColumn {
-            items(aboutItems) {
+            items(learnItems) {
                 Column(
                     modifier = Modifier
                         .padding(
@@ -45,7 +41,10 @@ fun AboutScreen(onCardClick: (ContentCardItem) -> Unit) {
                             horizontal = dimensionResource(R.dimen.dp_standard)
                         )
                 ) {
-                    ContentCard(cardItem = it) { onCardClick(it) }
+                    ContentCard(
+                        cardItem = it,
+                        isCollapsibleCard = true
+                    ) { onCardClick(it) }
                 }
             }
         }
