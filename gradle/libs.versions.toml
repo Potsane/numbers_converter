@@ -9,7 +9,7 @@ legacySupportV4 = "1.0.0"
 lifecycleLivedataKtx = "2.6.2"
 
 #Firebase
-firebaseBom = "32.6.0"
+firebaseBom = "32.7.0"
 firebaseCrashlyticsGradle = "2.9.9"
 
 #Google services
