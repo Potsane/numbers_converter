@@ -5,6 +5,8 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.app.rapidnumberconverter.ui.base.BaseRapidNumbersFragment
 import com.app.rapidnumberconverter.ui.base.ComposableScreen
+import com.app.rapidnumberconverter.ui.theme.NumbersConverterAppTheme
+import com.app.rapidnumberconverter.utils.mockLearnItems
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,10 +23,8 @@ class LearnFragment : BaseRapidNumbersFragment<LearnViewModel, ViewDataBinding>(
     }
 
     override fun ComposeView.setContent() = setContent {
-        viewModel.learnArticles.value?.let {
-            LearnScreen(it){
-
-            }
+        NumbersConverterAppTheme {
+            LearnScreen(mockLearnItems) {}
         }
     }
 }

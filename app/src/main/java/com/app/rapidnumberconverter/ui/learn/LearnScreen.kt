@@ -27,7 +27,10 @@ fun LearnScreen(
     ) {
 
         Text(
-            modifier = Modifier.padding(top = dimensionResource(R.dimen.sp_one_and_half)),
+            modifier = Modifier.padding(
+                top = dimensionResource(R.dimen.dp_one_and_half),
+                bottom =  dimensionResource(R.dimen.dp_standard),
+            ),
             text = stringResource(R.string.title_learn_articles),
             style = MaterialTheme.typography.titleLarge
         )
