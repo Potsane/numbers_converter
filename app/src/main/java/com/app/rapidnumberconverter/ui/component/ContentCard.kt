@@ -1,6 +1,5 @@
 package com.app.rapidnumberconverter.ui.component
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -46,7 +45,6 @@ fun ContentCard(
 
     Card(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
-        modifier = Modifier.background(Color.Red),
         onClick = { onCardItemClick(cardItem) },
         shape = MaterialTheme.shapes.small,
         elevation = CardDefaults.cardElevation(dimensionResource(R.dimen.dp_one_eighth)),
@@ -105,7 +103,7 @@ fun ContentCard(
                     containerColor = Color.Transparent,
                     contentColor = MaterialTheme.colorScheme.primary
                 ),
-                contentPadding = PaddingValues(start = dimensionResource(R.dimen.dp_half))
+                contentPadding = PaddingValues(horizontal = dimensionResource(R.dimen.dp_standard))
             ) {
                 Text(
                     text = cardItem.action.name,
