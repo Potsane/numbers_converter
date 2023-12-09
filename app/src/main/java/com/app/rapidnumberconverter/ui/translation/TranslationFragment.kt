@@ -1,17 +1,18 @@
 package com.app.rapidnumberconverter.ui.translation
 
+import androidx.compose.ui.platform.ComposeView
+import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
-import com.app.rapidnumberconverter.R
-import com.app.rapidnumberconverter.databinding.FragmentTranslationBinding
 import com.app.rapidnumberconverter.ui.base.BaseRapidNumbersFragment
+import com.app.rapidnumberconverter.ui.base.ComposableScreen
 import com.app.rapidnumberconverter.ui.common.showDialog
+import com.app.rapidnumberconverter.ui.theme.NumbersConverterAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class TranslationFragment :
-    BaseRapidNumbersFragment<TranslationViewModel, FragmentTranslationBinding>() {
-
-    override fun getLayoutId() = R.layout.fragment_translation
+    BaseRapidNumbersFragment<TranslationViewModel, ViewDataBinding>(),
+    ComposableScreen {
 
     override fun createViewModel(): TranslationViewModel {
         return ViewModelProvider(
@@ -38,6 +39,14 @@ class TranslationFragment :
     }
 
     private fun showDirectionsMenuItem(items: List<String>) {
-        showPopupMenuItem(items, binding.textViewDirection) { viewModel.onMenuItemClick(it) }
+        //showPopupMenuItem(items, binding.textViewDirection) { viewModel.onMenuItemClick(it) }
+    }
+
+    override fun ComposeView.setContent() = setContent {
+        NumbersConverterAppTheme {
+            TranslationScreen(
+                viewModel
+            )
+        }
     }
 }
