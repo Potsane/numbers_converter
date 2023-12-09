@@ -84,6 +84,7 @@ dependencies {
 
     //Lottie
     implementation(libs.lottie)
+    implementation(libs.lottie.compose)
 
     // Navigation
     implementation(libs.androidx.navigation.navigation.fragment.ktx)

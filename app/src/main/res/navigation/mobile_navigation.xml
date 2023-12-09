@@ -14,8 +14,7 @@
     <fragment
         android:id="@+id/navigation_learn"
         android:name="com.app.rapidnumberconverter.ui.learn.LearnFragment"
-        android:label="Learn"
-        tools:layout="@layout/fragment_learn">
+        android:label="Learn">
         <action
             android:id="@+id/learn_to_error"
             app:destination="@id/navigation_error" />
@@ -29,13 +28,11 @@
     <fragment
         android:id="@+id/navigation_about"
         android:name="com.app.rapidnumberconverter.ui.about.AboutFragment"
-        android:label="About"
-        tools:layout="@layout/fragment_about" />
+        android:label="About"/>
     <fragment
         android:id="@+id/navigation_error"
         android:name="com.app.rapidnumberconverter.ui.error.ErrorFragment"
-        android:label="Error"
-        tools:layout="@layout/fragment_error">
+        android:label="Error">
         <action
             android:id="@+id/error_to_home"
             app:destination="@id/navigation_home"

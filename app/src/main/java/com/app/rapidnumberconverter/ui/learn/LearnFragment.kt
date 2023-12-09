@@ -24,7 +24,7 @@ class LearnFragment : BaseRapidNumbersFragment<LearnViewModel, ViewDataBinding>(
 
     override fun ComposeView.setContent() = setContent {
         NumbersConverterAppTheme {
-            LearnScreen(mockLearnItems) {}
+            LearnScreen(mockLearnItems) { viewModel.onMoreButtonClick(it) }
         }
     }
 }
