@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -35,6 +37,7 @@ fun TranslationScreen(
 ) {
 
     var translationText by remember { mutableStateOf("") }
+    var isDropDownMenuShown by remember { mutableStateOf(false) }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -55,11 +58,29 @@ fun TranslationScreen(
                 style = MaterialTheme.typography.titleLarge
             )
             Icon(
-                modifier = Modifier.clickable { viewModel.showMenuItem() },
+                modifier = Modifier.clickable {
+                    isDropDownMenuShown = !isDropDownMenuShown
+                },
                 painter = iconId,
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.primary
             )
+
+            DropdownMenu(
+                modifier = Modifier.padding(horizontal = 24.dp),
+                expanded = isDropDownMenuShown,
+                onDismissRequest = { isDropDownMenuShown = false }
+            ) {
+                viewModel.directions.forEach {
+                    DropdownMenuItem(
+                        text = { Text(it) },
+                        onClick = {
+                            viewModel.onMenuItemClick(it)
+                            isDropDownMenuShown = false
+                        }
+                    )
+                }
+            }
         }
 
         Text(
@@ -80,12 +101,12 @@ fun TranslationScreen(
             ),
 
             /*colors = TextFieldDefaults.DecorationBox (
-                colors = TextFieldColors(
+            colors = TextFieldColors(
 
-                )
-                //focusedBorderColor = MaterialTheme.colorScheme.primary,
-                //unfocusedBorderColor = MaterialTheme.colorScheme.secondary,
-            ),*/
+            )
+            //focusedBorderColor = MaterialTheme.colorScheme.primary,
+            //unfocusedBorderColor = MaterialTheme.colorScheme.secondary,
+        ),*/
             value = translationText,
             onValueChange = { translationText = it },
             label = { Text(text = stringResource(R.string.hint_translation_source)) },
@@ -96,7 +117,7 @@ fun TranslationScreen(
                 .padding(horizontal = dimensionResource(R.dimen.dp_standard))
                 .fillMaxWidth(),
             shape = MaterialTheme.shapes.small,
-            onClick = { },
+            onClick = { viewModel.onTranslate(translationText) },
         ) {
             Text(
                 color = Color.White,

@@ -13,17 +13,14 @@ import kotlinx.coroutines.flow.StateFlow
 
 class TranslationViewModel : BaseRapidNumbersViewModel() {
 
-    private val directions = listOf("Text to Binary", "Binary to Text")
-    val plainText = MutableStateFlow("")
+    val directions = listOf("Text to Binary", "Binary to Text")
 
     private val _translationDirection = MutableStateFlow(directions.first())
     val translationDirection: StateFlow<String> = _translationDirection
 
-    fun showMenuItem() = postUiCommand(ShowTranslationDirectionMenu(directions))
-
-    fun onTranslate() {
-        if (plainText.value.isNotEmpty()) {
-            translateText()
+    fun onTranslate(plainText: String) {
+        if (plainText.isNotEmpty()) {
+            translateText(plainText)
         }
     }
 
@@ -31,19 +28,19 @@ class TranslationViewModel : BaseRapidNumbersViewModel() {
         _translationDirection.value = selectedOption
     }
 
-    private fun translateText() {
+    private fun translateText(plainText: String) {
         val directionType = TranslationDirection.getEnumForValue(_translationDirection.value)
         if (directionType == TranslationDirection.BINARY_TO_TEXT) {
             try {
-                val text = TranslationUtils.translateBinary(plainText.value.trim())
+                val text = TranslationUtils.translateBinary(plainText.trim())
                 postUiCommand(ShowTranslationResult(text))
             } catch (exception: Exception) {
                 postUiCommand(ShowInvalidTextFormatDialog())
             }
         } else if (directionType == TranslationDirection.TEXT_TO_BINARY) {
             val translatedText = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-                plainText.value.toBinary().prettyBinary(8, " ")
-            else plainText.value.toBinary()
+                plainText.toBinary().prettyBinary(8, " ")
+            else plainText.toBinary()
             postUiCommand(ShowTranslationResult(translatedText))
         }
     }

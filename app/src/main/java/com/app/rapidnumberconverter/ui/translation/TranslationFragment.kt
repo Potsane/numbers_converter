@@ -23,7 +23,6 @@ class TranslationFragment :
 
     override fun onUiCommands(command: Any) {
         when (command) {
-            is ShowTranslationDirectionMenu -> showDirectionsMenuItem(command.menuItems)
             is ShowInvalidTextFormatDialog -> showInvalidNumberFormatDialog()
             else -> super.onUiCommands(command)
         }
@@ -36,10 +35,6 @@ class TranslationFragment :
             dialogMessage = "Ensure the text is in the correct format",
             context = requireContext()
         )
-    }
-
-    private fun showDirectionsMenuItem(items: List<String>) {
-        //showPopupMenuItem(items, binding.textViewDirection) { viewModel.onMenuItemClick(it) }
     }
 
     override fun ComposeView.setContent() = setContent {
