@@ -1,5 +1,6 @@
 package com.app.rapidnumberconverter.ui.error
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -74,6 +75,10 @@ fun ErrorScreen(
             modifier = Modifier
                 .padding(dimensionResource(R.dimen.dp_standard))
                 .fillMaxWidth(),
+            border = BorderStroke(
+                dimensionResource(R.dimen.dp_one_sixteenth),
+                MaterialTheme.colorScheme.primary
+            ),
             shape = MaterialTheme.shapes.small,
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.Transparent
