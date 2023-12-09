@@ -11,6 +11,7 @@ import com.app.rapidnumberconverter.ui.base.ShowProgress
 import com.app.rapidnumberconverter.utils.mockLearnItems
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.lang.RuntimeException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -27,10 +28,12 @@ class LearnViewModel @Inject constructor(
         }
     }
 
+    //TODO (Make API Call)
     private fun fetchLearnArticles() {
         viewModelScope.launch {
             postUiCommand(ShowProgress(true))
             try {
+                throw RuntimeException()
                 learnArticlesRepository.fetchLearnArticles().let { response ->
                     _learnArticles.value = mockLearnItems
                     //Fix service
