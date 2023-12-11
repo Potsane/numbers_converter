@@ -4,13 +4,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -23,7 +21,9 @@ import com.app.rapidnumberconverter.ui.theme.NumbersConverterAppTheme
 
 @Composable
 fun ConverterScreen(
-    viewModel: ConverterViewModel
+    viewModel: ConverterViewModel,
+    onCopyText: (String) -> Unit,
+    onPasteText: () -> String
 ) {
 
     Column(
@@ -63,21 +63,11 @@ fun ConverterScreen(
                 .padding(
                     vertical = dimensionResource(R.dimen.dp_one_and_half),
                     horizontal = dimensionResource(R.dimen.dp_standard)
-                )
+                ),
+            onCopyText = { onCopyText(it) },
+            onPasteText = { onPasteText() },
+            onSubmit = { viewModel.convert(it) }
         )
-
-        Button(
-            modifier = Modifier
-                .padding(horizontal = dimensionResource(R.dimen.dp_standard))
-                .fillMaxWidth(),
-            shape = MaterialTheme.shapes.small,
-            onClick = { },
-        ) {
-            Text(
-                color = Color.White,
-                text = stringResource(R.string.button_convert)
-            )
-        }
     }
 }
 
