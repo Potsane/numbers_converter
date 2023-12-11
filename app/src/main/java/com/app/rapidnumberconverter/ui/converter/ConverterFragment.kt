@@ -3,13 +3,10 @@ package com.app.rapidnumberconverter.ui.converter
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
-import android.view.View
 import androidx.compose.ui.platform.ComposeView
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.app.rapidnumberconverter.R
-import com.app.rapidnumberconverter.common.ConversionContext
-import com.app.rapidnumberconverter.databinding.FragmentConverterBinding
 import com.app.rapidnumberconverter.ui.base.BaseRapidNumbersFragment
 import com.app.rapidnumberconverter.ui.base.ComposableScreen
 import com.app.rapidnumberconverter.ui.common.showDialog
@@ -26,7 +23,6 @@ class ConverterFragment : BaseRapidNumbersFragment<ConverterViewModel, ViewDataB
 
     override fun onUiCommands(command: Any) {
         when (command) {
-            //is ShowFromNumbersMenu -> showNumbersMenuItem(command)
             is ShowInvalidNumberFormatDialog -> showInvalidNumberFormatDialog()
             is CopyText -> copyText(command.text)
             is PasteText -> pasteText()
@@ -40,13 +36,6 @@ class ConverterFragment : BaseRapidNumbersFragment<ConverterViewModel, ViewDataB
             ConverterViewModel.Factory()
         )[ConverterViewModel::class.java]
     }
-
-    /*private fun showNumbersMenuItem(command: ShowFromNumbersMenu) {
-        showPopupMenuItem(
-            command.menuItems,
-            getAnchorView(command)
-        ) { viewModel.onMenuItemClick(it, command.conversionContext) }
-    }*/
 
     private fun showInvalidNumberFormatDialog() {
         hideKeyBoard()
@@ -62,20 +51,19 @@ class ConverterFragment : BaseRapidNumbersFragment<ConverterViewModel, ViewDataB
         clipboardManager?.setPrimaryClip(clip)
     }
 
-    private fun pasteText() {
+    private fun pasteText(): String {
         val pasteData: ClipData? = clipboardManager?.primaryClip
         val item = pasteData?.getItemAt(0)
-        viewModel.convertingValue.value = item?.text.toString()
+        return item?.text.toString()
     }
 
-    /*private fun getAnchorView(command: ShowFromNumbersMenu): View {
-        //return if (command.conversionContext == ConversionContext.CONVERT_FROM) binding.textViewFrom
-        else binding.textViewTo
-    }*/
-
     override fun ComposeView.setContent() = setContent {
-        NumbersConverterAppTheme{
-            ConverterScreen(viewModel = viewModel)
+        NumbersConverterAppTheme {
+            ConverterScreen(
+                viewModel = viewModel,
+                onCopyText = { ex -> copyText(ex) },
+                onPasteText = { pasteText() }
+            )
         }
     }
 }
