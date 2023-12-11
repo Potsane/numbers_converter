@@ -8,28 +8,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.ArrayAdapter
-import android.widget.ListPopupWindow
 import androidx.annotation.CallSuper
-import androidx.annotation.LayoutRes
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.app.rapidnumberconverter.BR
-import com.app.rapidnumberconverter.R
 import com.app.rapidnumberconverter.navigation.NavigationCommand
 import com.app.rapidnumberconverter.ui.about.LaunchExternalPage
 import com.app.rapidnumberconverter.ui.translation.ShowTranslationResult
 import com.app.rapidnumberconverter.ui.translation.TranslationResultDialogFragment
 
-abstract class BaseRapidNumbersFragment<VM : BaseRapidNumbersViewModel, VDB : ViewDataBinding> :
+abstract class BaseRapidNumbersFragment<VM : BaseRapidNumbersViewModel> :
     Fragment() {
-
-    protected lateinit var binding: VDB
 
     protected val viewModel by lazy { createViewModel() }
 
@@ -38,30 +29,15 @@ abstract class BaseRapidNumbersFragment<VM : BaseRapidNumbersViewModel, VDB : Vi
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return if (this is ComposableScreen) {
-            ComposeView(requireContext()).apply {
-                setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-                setContent()
-            }
-        } else {
-            binding = DataBindingUtil.inflate(
-                inflater,
-                getLayoutId(),
-                container,
-                false
-            )
-            binding.root
+        return ComposeView(requireContext()).apply {
+            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+            setContent()
         }
     }
 
     @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (this !is ComposableScreen) {
-            binding.lifecycleOwner = viewLifecycleOwner
-            binding.setVariable(BR.viewModel, viewModel)
-        }
-
         viewModel.uiCommands.observe(viewLifecycleOwner, Observer(::onUiCommands))
         viewModel.navigationCommands.observe(viewLifecycleOwner, Observer(::onNavigate))
     }
@@ -89,10 +65,9 @@ abstract class BaseRapidNumbersFragment<VM : BaseRapidNumbersViewModel, VDB : Vi
         showProgressBar(false)
     }
 
-    @LayoutRes
-    open fun getLayoutId()= 0
-
     protected abstract fun createViewModel(): VM
+
+    protected abstract fun ComposeView.setContent()
 
     protected fun hideKeyBoard() {
         val inputMethodManager =
@@ -104,32 +79,6 @@ abstract class BaseRapidNumbersFragment<VM : BaseRapidNumbersViewModel, VDB : Vi
     private fun showTranslationResultDialog(title: String?, text: String) {
         val bottomSheetFragment = TranslationResultDialogFragment.newInstance(text, title)
         bottomSheetFragment.show(parentFragmentManager, null)
-    }
-
-    protected fun showPopupMenuItem(
-        items: List<String>,
-        anchorView: View,
-        onItemCLicked: (String) -> Unit
-    ) {
-        val numberSystemsMenuWindow =
-            ListPopupWindow(requireContext(), null, androidx.appcompat.R.attr.listPopupWindowStyle)
-
-        val adapter = getMenuItemsAdapter(items)
-        numberSystemsMenuWindow.anchorView = anchorView
-        numberSystemsMenuWindow.setAdapter(adapter)
-        numberSystemsMenuWindow.setOnItemClickListener { _, _, position, _ ->
-            numberSystemsMenuWindow.dismiss()
-            onItemCLicked(items[position])
-        }
-        numberSystemsMenuWindow.show()
-    }
-
-    private fun getMenuItemsAdapter(items: List<String>): ArrayAdapter<String> {
-        return ArrayAdapter(
-            activity as MainActivity,
-            R.layout.view_popup_menu_item,
-            items
-        )
     }
 
     private fun showProgressBar(show: Boolean) =

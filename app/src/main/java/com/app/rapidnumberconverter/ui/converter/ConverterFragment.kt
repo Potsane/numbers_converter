@@ -4,22 +4,16 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
 import androidx.compose.ui.platform.ComposeView
-import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
-import com.app.rapidnumberconverter.R
 import com.app.rapidnumberconverter.ui.base.BaseRapidNumbersFragment
-import com.app.rapidnumberconverter.ui.base.ComposableScreen
 import com.app.rapidnumberconverter.ui.common.showDialog
 import com.app.rapidnumberconverter.ui.theme.NumbersConverterAppTheme
 
-class ConverterFragment : BaseRapidNumbersFragment<ConverterViewModel, ViewDataBinding>(),
-    ComposableScreen {
+class ConverterFragment : BaseRapidNumbersFragment<ConverterViewModel>() {
 
     private val clipboardManager by lazy {
         requireContext().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager?
     }
-
-    override fun getLayoutId() = R.layout.fragment_converter
 
     override fun onUiCommands(command: Any) {
         when (command) {

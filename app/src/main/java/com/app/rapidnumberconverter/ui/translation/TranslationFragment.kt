@@ -1,7 +1,6 @@
 package com.app.rapidnumberconverter.ui.translation
 
 import androidx.compose.ui.platform.ComposeView
-import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.app.rapidnumberconverter.ui.base.BaseRapidNumbersFragment
 import com.app.rapidnumberconverter.ui.base.ComposableScreen
@@ -10,9 +9,7 @@ import com.app.rapidnumberconverter.ui.theme.NumbersConverterAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class TranslationFragment :
-    BaseRapidNumbersFragment<TranslationViewModel, ViewDataBinding>(),
-    ComposableScreen {
+class TranslationFragment : BaseRapidNumbersFragment<TranslationViewModel>() {
 
     override fun createViewModel(): TranslationViewModel {
         return ViewModelProvider(

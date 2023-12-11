@@ -2,14 +2,11 @@ package com.app.rapidnumberconverter.ui.about
 
 import android.content.Intent
 import androidx.compose.ui.platform.ComposeView
-import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.app.rapidnumberconverter.ui.base.BaseRapidNumbersFragment
-import com.app.rapidnumberconverter.ui.base.ComposableScreen
 import com.app.rapidnumberconverter.ui.theme.NumbersConverterAppTheme
 
-class AboutFragment : BaseRapidNumbersFragment<AboutViewModel, ViewDataBinding>(),
-    ComposableScreen {
+class AboutFragment : BaseRapidNumbersFragment<AboutViewModel>() {
 
     override fun createViewModel(): AboutViewModel {
         return ViewModelProvider(this, AboutViewModel.Factory())[AboutViewModel::class.java]
