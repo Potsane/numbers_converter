@@ -95,7 +95,7 @@ fun ErrorScreen(
 
 @Preview
 @Composable
-private fun CollapsibleCardPreview() {
+private fun ErrorScreenPreview() {
     NumbersConverterAppTheme {
         ErrorScreen({}) {}
     }
