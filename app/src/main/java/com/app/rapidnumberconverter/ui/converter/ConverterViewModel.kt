@@ -14,7 +14,7 @@ import com.app.rapidnumberconverter.utils.*
 
 class ConverterViewModel : BaseRapidNumbersViewModel(), NumberInputListener {
 
-    private val numberSystems = listOf("Decimal", "Hexadecimal", "Octal", "Binary")
+     val numberSystems = listOf("Decimal", "Hexadecimal", "Octal", "Binary")
 
     private val _fromNumberSystem = MutableLiveData("")
     val fromNumberSystem: LiveData<String> = _fromNumberSystem
@@ -55,6 +55,7 @@ class ConverterViewModel : BaseRapidNumbersViewModel(), NumberInputListener {
         postUiCommand(ShowTranslationResult(convertedValue, "Converted Value"))
     }
 
+    //when menu icon is clicked (DELETE)
     fun showMenuItem(conversionContext: ConversionContext) {
         when (conversionContext) {
             ConversionContext.CONVERT_FROM -> {
@@ -66,6 +67,7 @@ class ConverterViewModel : BaseRapidNumbersViewModel(), NumberInputListener {
         }
     }
 
+    //item is selected
     fun onMenuItemClick(selectedOption: String, conversionContext: ConversionContext) {
         when (conversionContext) {
             ConversionContext.CONVERT_FROM -> _fromNumberSystem.value = selectedOption

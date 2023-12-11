@@ -99,14 +99,6 @@ fun TranslationScreen(
                 focusedBorderColor = MaterialTheme.colorScheme.primary,
                 unfocusedBorderColor = MaterialTheme.colorScheme.primary
             ),
-
-            /*colors = TextFieldDefaults.DecorationBox (
-            colors = TextFieldColors(
-
-            )
-            //focusedBorderColor = MaterialTheme.colorScheme.primary,
-            //unfocusedBorderColor = MaterialTheme.colorScheme.secondary,
-        ),*/
             value = translationText,
             onValueChange = { translationText = it },
             label = { Text(text = stringResource(R.string.hint_translation_source)) },
