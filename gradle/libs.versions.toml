@@ -29,7 +29,7 @@ kotlinGradlePlugin = "1.9.21"
 lottieVersion = "6.2.0"
 
 #AndroidX nav
-navigationUiKtxVersion = "2.7.5"
+navigationUiKtxVersion = "2.7.6"
 
 #Material
 material = "1.10.0"
