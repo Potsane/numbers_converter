@@ -13,7 +13,7 @@ firebaseBom = "32.8.1"
 firebaseCrashlyticsGradle = "3.0.1"
 
 #Google services
-googleServices = "4.4.1"
+googleServices = "4.4.2"
 
 #Gradle
 gradle = "8.4.0"
