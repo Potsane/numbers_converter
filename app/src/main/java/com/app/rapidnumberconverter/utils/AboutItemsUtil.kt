@@ -22,7 +22,7 @@ val aboutItems = listOf(
             type = ContentCardItemActionType.SHARE,
         )
     ),
-    ContentCardItem(
+    /*ContentCardItem(
         title = "Rate us",
         description = "Love using this app, please give us a thumbs up on the Google Play Store.",
         action = ContentCardItemAction(
@@ -30,11 +30,14 @@ val aboutItems = listOf(
             type = ContentCardItemActionType.REDIRECT,
             url = Constants.APP_URL
         )
-    )
-  /*  AboutCardItem(
+    )*/
+    ContentCardItem(
         title = "Support us",
         description = "Love the app, you can help us keep going by donating to us.",
-        primaryButton = "Buy us coffee",
-        type = AboutCardItemType.SUPPORT_APP
-    )*/
+        action = ContentCardItemAction(
+            name = "Buy us coffee",
+            type = ContentCardItemActionType.REDIRECT,
+            url = Constants.PAY_PAL_URL
+        )
+    )
 )
