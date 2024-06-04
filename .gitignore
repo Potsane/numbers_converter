@@ -48,6 +48,7 @@ captures/
 #   git push origin master
 
 *.iml
+./idea/
 ./idea
 .idea/modules.xml
 .idea/workspace.xml
