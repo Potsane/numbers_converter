@@ -19,7 +19,7 @@ googleServices = "4.4.2"
 gradle = "8.4.1"
 
 #Junit
-junit = "1.1.5"
+junit = "1.2.1"
 junitVersion = "4.13.2"
 
 #Kotlin
