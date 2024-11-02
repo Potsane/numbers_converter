@@ -4,7 +4,7 @@
 appcompat = "1.7.0"
 constraintlayout = "2.1.4"
 coreKtx = "1.15.0"
-espressoCore = "3.5.1"
+espressoCore = "3.6.1"
 legacySupportV4 = "1.0.0"
 lifecycleLivedataKtx = "2.8.4"
 
