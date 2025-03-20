@@ -23,7 +23,7 @@ junit = "1.2.1"
 junitVersion = "4.13.2"
 
 #Kotlin
-kotlinGradlePlugin = "2.0.0"
+kotlinGradlePlugin = "2.1.20"
 
 #Lottie
 lottieVersion = "6.6.2"
