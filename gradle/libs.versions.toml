@@ -46,7 +46,7 @@ hiltAndroid = "2.55"
 hiltCompilerVersion = "1.2.0"
 
 #Compose
-composeTooling = "1.9.3"
+composeTooling = "1.10.1"
 composeBom = "2025.03.01"
 composeCompiler ="1.5.14"
 
