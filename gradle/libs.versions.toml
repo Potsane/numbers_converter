@@ -47,7 +47,7 @@ hiltCompilerVersion = "1.2.0"
 
 #Compose
 composeTooling = "1.9.3"
-composeBom = "2024.05.00"
+composeBom = "2025.03.01"
 composeCompiler ="1.5.14"
 
 [libraries]
