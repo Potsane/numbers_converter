@@ -10,7 +10,7 @@ lifecycleLivedataKtx = "2.8.7"
 
 #Firebase
 firebaseBom = "33.6.0"
-firebaseCrashlyticsGradle = "3.0.2"
+firebaseCrashlyticsGradle = "3.0.3"
 
 #Google services
 googleServices = "4.4.2"
