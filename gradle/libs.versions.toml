@@ -16,7 +16,7 @@ firebaseCrashlyticsGradle = "3.0.3"
 googleServices = "4.4.2"
 
 #Gradle
-gradle = "8.8.0"
+gradle = "8.9.1"
 
 #Junit
 junit = "1.2.1"
