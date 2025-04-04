@@ -26,7 +26,7 @@ junitVersion = "4.13.2"
 kotlinGradlePlugin = "2.0.0"
 
 #Lottie
-lottieVersion = "6.6.2"
+lottieVersion = "6.6.4"
 
 #AndroidX nav
 navigationUiKtxVersion = "2.8.4"
