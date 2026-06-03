@@ -3,7 +3,7 @@
 #AndroidX
 appcompat = "1.7.0"
 constraintlayout = "2.2.0"
-coreKtx = "1.15.0"
+coreKtx = "1.19.0"
 espressoCore = "3.6.1"
 legacySupportV4 = "1.0.0"
 lifecycleLivedataKtx = "2.8.7"
